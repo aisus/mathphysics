@@ -20,6 +20,11 @@ LY = 1
 
 x_vals, y_per_time = membrane.main_2d()
 
+
+def test():
+    x_vals, y_per_time = membrane.test()
+
+
 fig = plt.figure()
 ax = plt.axes(xlim=(0, LX), ylim=(-LY * 2, LY * 2))
 line, = ax.plot([], [], lw=2)
@@ -132,13 +137,16 @@ class PageThree(tk.Frame):
                              command=lambda: controller.show_frame(StartPage))
         button1.pack()
 
+        button2 = ttk.Button(self, text="Get data",
+                             command=lambda: ((x_vals, y_per_time = membrane.test()))
+        button2.pack()
+
         canvas = FigureCanvasTkAgg(fig, self)
         canvas.get_tk_widget().pack(side=tk.BOTTOM, fill=tk.BOTH, expand=True)
 
         toolbar = NavigationToolbar2Tk(canvas, self)
         toolbar.update()
         canvas._tkcanvas.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
-
 
 
 app = SeaofBTCapp()
