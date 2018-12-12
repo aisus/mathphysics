@@ -18,7 +18,7 @@ LARGE_FONT = ("Verdana", 12)
 LX = 4
 LY = 1
 
-x_vals, y_per_time = membrane.main_2d()
+x_vals, y_per_time = membrane.animated_2d()
 
 
 def test():
@@ -138,7 +138,7 @@ class PageThree(tk.Frame):
         button1.pack()
 
         button2 = ttk.Button(self, text="Get data",
-                             command=lambda: ((x_vals, y_per_time = membrane.test()))
+                             command=lambda: ())
         button2.pack()
 
         canvas = FigureCanvasTkAgg(fig, self)

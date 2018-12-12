@@ -1,12 +1,10 @@
 import numpy as np
-import pylab
 import timeit
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import pyplot as plt
 from matplotlib import animation
 
 T_MIN = 0
-T_MAX = 10
 N_MAX = 20
 GRID_STEP = 0.04
 TIME_STEP = 0.1
@@ -14,8 +12,7 @@ LX = 4
 LY = 1
 
 
-##____________________GRAPHS_________________________
-def graph_2d(x, y, name, color):
+def __plot_2d(x, y, name, color):
     fig = plt.figure()
     ax = plt.subplot(111)
 
@@ -40,7 +37,7 @@ def graph_2d(x, y, name, color):
     plt.show()
 
 
-def anim_graph_2d(x_vals, y_per_time):
+def __anim_plot_2d(x_vals, y_per_time):
     fig = plt.figure()
     ax = plt.axes(xlim=(0, LX), ylim=(-LY * 2, LY * 2))
     line, = ax.plot([], [], lw=2)
@@ -64,42 +61,63 @@ def anim_graph_2d(x_vals, y_per_time):
 
     plt.show()
 
-def graph_3d(x, y, z):
-    fig = pylab.figure()
+
+def __plot_3d(x, y, z):
+    fig = plt.figure()
     axes = Axes3D(fig)
 
-    axes.plot_surface(x, y, z)
+    axes.plot_surface(x, y, z, cmap='inferno')
 
-    pylab.show()
-
-
-def anim_graph_3d():
-    pass
+    plt.show()
 
 
-##___________________________________________________
+def __anim_plot_3d(x_vals, y_vals, z_per_time):
+    fig = plt.figure()
+    axes = Axes3D(fig)
+    axes.plot_surface(x_vals, y_vals, z_per_time[0])
 
-##___________________SERIES_SUM______________________
-def c_n(n):
+    # animation function.  This is called sequentially
+    def animate(i):
+        axes.clear()
+
+        axes.autoscale(False, axis='z', tight=None)
+        axes.set_zlim(-1, 1)
+
+        index = i % len(z_per_time)
+        z = z_per_time[index]
+        return axes.plot_surface(x_vals, y_vals, z, cmap='inferno'),
+
+    # call the animator.  blit=True means only re-draw the parts that have changed.
+    anim = animation.FuncAnimation(fig, animate, frames=200, interval=60, blit=False)
+
+    plt.show()
+
+
+def __c_n(n):
     return 8 * (np.pi * n * np.sin(np.pi * n) + 2 * np.cos(np.pi * n) - 2) / (np.pi ** 3 * n ** 3)
 
 
-def series_subsum(n, x, t):
-    return np.sin(n * np.pi * x / 4) * c_n(n) * np.cos(np.sqrt((n * np.pi / 4) ** 2 + (np.pi) ** 2) * t)
+def __series_element(n, x, t):
+    return np.sin(n * np.pi * x / 4) * __c_n(n) * np.cos(np.sqrt((n * np.pi / 4) ** 2 + np.pi ** 2) * t)
 
 
-def series_sum(N, x, t):
+def __series_sum_2d(N, x, t):
     res = 0
     for n in range(1, N):
-        res += -series_subsum(n, x, t)
+        res += -__series_element(n, x, t)
     return res
 
 
-##___________________________________________________
+def __series_sum_3d(N, x, y, t):
+    res = 0
+    for n in range(1, N):
+        res += -__series_element(n, x, t)
+    return res * np.sin(np.pi * y / LY)
 
-def main_2d():
-    time_slices_count = int((T_MAX - T_MIN) / TIME_STEP)
-    T = np.linspace(T_MIN, T_MAX, time_slices_count)
+
+def animated_2d(time):
+    time_slices_count = int((time - T_MIN) / TIME_STEP)
+    T = np.linspace(T_MIN, time, time_slices_count)
 
     grid_points_count = int(LX / GRID_STEP)
     x_vals = np.linspace(0, LX, grid_points_count)
@@ -107,36 +125,54 @@ def main_2d():
     values_per_time = []
 
     start = timeit.default_timer()
-    print("Starting calculation for 2d...")
+    print("Starting calculation for animated 2d...")
     for t in T:
         res = []
         for x in x_vals:
-            subres = series_sum(N_MAX, x, t)
+            subres = __series_sum_2d(N_MAX, x, t)
             res.append(subres)
         values_per_time.append(res)
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
-    ## anim_graph_2d()
-    return x_vals, values_per_time
+    __anim_plot_2d(x_vals, values_per_time)
 
 
-def main_3d():
-    x_vals = np.linspace(0, LX, int(LX / GRID_STEP))
-    y_vals = np.linspace(0, LY, int(LY / GRID_STEP))
+def animated_3d(time):
+    time_slices_count = int((time - T_MIN) / TIME_STEP)
+    T = np.linspace(T_MIN, time, time_slices_count)
+
+    x = np.linspace(0, LX, int(LX / GRID_STEP))
+    y = np.linspace(0, LY, int(LY / GRID_STEP))
 
     start = timeit.default_timer()
-    print("Starting calculation for 2d...")
+    print("Starting calculation for animated 3d...")
 
-    t = 4
-    res = []
-    for x in x_vals:
-        subres = series_sum(N_MAX, x, t)
-        res.append(subres)
+    xv, yv = np.meshgrid(x, y)
+    values_per_time = []
+
+    for t in T:
+        res = __series_sum_3d(N_MAX, xv, yv, t)
+        values_per_time.append(res)
 
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
+    __anim_plot_3d(xv, yv, values_per_time)
 
-if __name__ == '__main__':
-    main_2d()
+
+def static_3d(time):
+    x = np.linspace(0, LX, int(LX / GRID_STEP))
+    y = np.linspace(0, LY, int(LY / GRID_STEP))
+
+    start = timeit.default_timer()
+    print("Starting calculation for 3d...")
+
+    xv, yv = np.meshgrid(x, y)
+
+    res = __series_sum_3d(N_MAX, xv, yv, time)
+
+    end = timeit.default_timer()
+    print("Finished calculation in {0}s".format(end - start))
+
+    __plot_3d(xv, yv, res)
