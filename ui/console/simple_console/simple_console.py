@@ -1,4 +1,4 @@
-from equations import membrane
+from equations.membrane import *
 
 
 def display_man():
@@ -8,12 +8,14 @@ def display_man():
 def input_loop():
     while True:
         user_input = input().split()
-        if user_input[0] == '2d':
-            membrane.animated_2d(float(user_input[1]))
+        if user_input[0] == 'a2d':
+            animated_2d(float(user_input[1]))
+        elif user_input[0] == '2d':
+            static_2d(float(user_input[1]))
         elif user_input[0] == '3d':
-            membrane.static_3d(float(user_input[1]))
+            static_3d(float(user_input[1]))
         elif user_input[0] == 'a3d':
-            membrane.animated_3d(float(user_input[1]))
+            animated_3d(float(user_input[1]))
 
 
 if __name__ == '__main__':

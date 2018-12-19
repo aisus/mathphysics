@@ -12,13 +12,13 @@ LX = 4
 LY = 1
 
 
-def __plot_2d(x, y, name, color):
+def __plot_2d(x, y):
     fig = plt.figure()
     ax = plt.subplot(111)
 
     plt.rc('lines', linewidth=1)
 
-    graph, = ax.plot(x, y, color=color, marker='o',
+    graph, = ax.plot(x, y, color='b', marker='o',
                      linestyle='-', linewidth=2, markersize=0.1)
 
     plt.xlabel('x')
@@ -27,9 +27,6 @@ def __plot_2d(x, y, name, color):
     box = ax.get_position()
     ax.set_position([box.x0, box.y0 + box.height * 0.1,
                      box.width, box.height * 0.9])
-
-    ax.legend([graph], [name],
-              loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
 
     plt.grid(True)
 
@@ -113,6 +110,20 @@ def __series_sum_3d(N, x, y, t):
     for n in range(1, N):
         res += -__series_element(n, x, t)
     return res * np.sin(np.pi * y / LY)
+
+
+def static_2d(time):
+    x = np.linspace(0, LX, int(LX / GRID_STEP))
+
+    start = timeit.default_timer()
+    print("Starting calculation for 2d...")
+
+    res = __series_sum_2d(N_MAX, x, time)
+
+    end = timeit.default_timer()
+    print("Finished calculation in {0}s".format(end - start))
+
+    __plot_2d(x, res)
 
 
 def animated_2d(time):

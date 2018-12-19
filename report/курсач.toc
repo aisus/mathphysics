@@ -1,0 +1,13 @@
+\babel@toc {russian}{}
+\contentsline {section}{Введение}{6}{section*.1}
+\contentsline {section}{\numberline {1}Постановка краевой задачи}{7}{section.1}
+\contentsline {section}{\numberline {2}Аналитическое решение краевой задачи и получение решения задачи в виде ряда Фурье}{9}{section.2}
+\contentsline {section}{\numberline {3}Получение расчетной формулы для начальной функции $\psi _1$ (Кирилин П. Н.)}{13}{section.3}
+\contentsline {section}{\numberline {4}Получение расчетной формулы для начальной функции $\psi _2$ (Посоха К.А.)}{15}{section.4}
+\contentsline {section}{\numberline {5}Анализ погрешности решения и вычислительной сложности алгоритма}{17}{section.5}
+\contentsline {section}{\numberline {6}Результаты вычислительных экспериментов}{20}{section.6}
+\contentsline {section}{Заключение}{27}{section*.16}
+\contentsline {section}{Список литературы}{28}{section*.17}
+\contentsline {section}{Приложение А Полиномы Лежандра}{29}{section*.18}
+\contentsline {section}{Приложение Б Код программы}{30}{section*.19}
+\contentsline {section}{Приложение В Метод квадратур Гаусса-Лежандра}{41}{section*.20}
