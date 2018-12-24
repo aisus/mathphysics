@@ -16,6 +16,8 @@ def input_loop():
             static_3d(float(user_input[1]))
         elif user_input[0] == 'a3d':
             animated_3d(float(user_input[1]))
+        elif user_input[0] == 'eps':
+            calculate_with_precision(float(user_input[1]), float(user_input[2]), float(user_input[3]), float(user_input[4]))
 
 
 if __name__ == '__main__':

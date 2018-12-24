@@ -12,7 +12,7 @@ LX = 4
 LY = 1
 
 
-def __plot_2d(x, y):
+def __plot_2d(x, y, t, vline=0):
     fig = plt.figure()
     ax = plt.subplot(111)
 
@@ -28,6 +28,12 @@ def __plot_2d(x, y):
     ax.set_position([box.x0, box.y0 + box.height * 0.1,
                      box.width, box.height * 0.9])
 
+    if vline != 0:
+        plt.axvline(x=vline, color='r')
+
+    ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
+              loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+
     plt.grid(True)
 
     # plt.savefig(name + '.png')
@@ -38,11 +44,16 @@ def __anim_plot_2d(x_vals, y_per_time):
     fig = plt.figure()
     ax = plt.axes(xlim=(0, LX), ylim=(-LY * 2, LY * 2))
     line, = ax.plot([], [], lw=2)
+    time_text = ax.text(.2, 1.5, '', fontsize=15)
+
+    plt.xlabel('x')
+    plt.ylabel('y')
 
     # initialization function: plot the background of each frame
     def init():
+        time_text.set_text('')
         line.set_data([], [])
-        return line,
+        return line, time_text
 
     # animation function.  This is called sequentially
     def animate(i):
@@ -50,12 +61,12 @@ def __anim_plot_2d(x_vals, y_per_time):
         x = x_vals
         y = y_per_time[index]
         line.set_data(x, y)
-        return line,
+        time_text.set_text('T={0}'.format(round(index * TIME_STEP, 3)))
+        return line, time_text
 
     # call the animator.  blit=True means only re-draw the parts that have changed.
-    anim = animation.FuncAnimation(fig, animate, init_func=init,
-                                   frames=200, interval=60, blit=True)
-
+    anim = animation.FuncAnimation(fig, animate,
+                                   frames=200, interval=60, blit=False)
     plt.show()
 
 
@@ -73,6 +84,8 @@ def __anim_plot_3d(x_vals, y_vals, z_per_time):
     axes = Axes3D(fig)
     axes.plot_surface(x_vals, y_vals, z_per_time[0])
 
+    ##time_text = axes.text(.5, .5, '', fontsize=15, )
+
     # animation function.  This is called sequentially
     def animate(i):
         axes.clear()
@@ -82,7 +95,9 @@ def __anim_plot_3d(x_vals, y_vals, z_per_time):
 
         index = i % len(z_per_time)
         z = z_per_time[index]
-        return axes.plot_surface(x_vals, y_vals, z, cmap='inferno'),
+
+        # time_text.set_text('T={0}'.format(round(index*TIME_STEP,3)))
+        return axes.plot_surface(x_vals, y_vals, z, cmap='inferno'),  # time_text
 
     # call the animator.  blit=True means only re-draw the parts that have changed.
     anim = animation.FuncAnimation(fig, animate, frames=200, interval=60, blit=False)
@@ -123,10 +138,10 @@ def static_2d(time):
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
-    __plot_2d(x, res)
+    __plot_2d(x, res, time)
 
 
-def animated_2d(time):
+def animated_2d(time, n=N_MAX):
     time_slices_count = int((time - T_MIN) / TIME_STEP)
     T = np.linspace(T_MIN, time, time_slices_count)
 
@@ -140,7 +155,7 @@ def animated_2d(time):
     for t in T:
         res = []
         for x in x_vals:
-            subres = __series_sum_2d(N_MAX, x, t)
+            subres = __series_sum_2d(n, x, t)
             res.append(subres)
         values_per_time.append(res)
     end = timeit.default_timer()
@@ -149,7 +164,7 @@ def animated_2d(time):
     __anim_plot_2d(x_vals, values_per_time)
 
 
-def animated_3d(time):
+def animated_3d(time, n=N_MAX):
     time_slices_count = int((time - T_MIN) / TIME_STEP)
     T = np.linspace(T_MIN, time, time_slices_count)
 
@@ -163,7 +178,7 @@ def animated_3d(time):
     values_per_time = []
 
     for t in T:
-        res = __series_sum_3d(N_MAX, xv, yv, t)
+        res = __series_sum_3d(n, xv, yv, t)
         values_per_time.append(res)
 
     end = timeit.default_timer()
@@ -172,7 +187,7 @@ def animated_3d(time):
     __anim_plot_3d(xv, yv, values_per_time)
 
 
-def static_3d(time):
+def static_3d(time, n=N_MAX):
     x = np.linspace(0, LX, int(LX / GRID_STEP))
     y = np.linspace(0, LY, int(LY / GRID_STEP))
 
@@ -181,9 +196,29 @@ def static_3d(time):
 
     xv, yv = np.meshgrid(x, y)
 
-    res = __series_sum_3d(N_MAX, xv, yv, time)
+    res = __series_sum_3d(n, xv, yv, time)
 
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
     __plot_3d(xv, yv, res)
+
+
+def calculate_with_precision(x, y, t, eps):
+    x_sp = np.linspace(0, LX, int(LX / GRID_STEP))
+    n = int(find_n(eps))
+
+    start = timeit.default_timer()
+    print("Starting calculation with given precision {0}, N is {1}".format(eps, n))
+    res = __series_sum_3d(n, x, y, t)
+    end = timeit.default_timer()
+    print("Finished calculation in {0}s".format(round(end - start, 5)))
+    print("Result: {0}".format(res))
+
+    y_sp = __series_sum_3d(n, x_sp, y, t)
+
+    __plot_2d(x_sp, y_sp, t, x)
+
+
+def find_n(eps):
+    return (4 * np.sqrt(np.pi * eps + 1) + 1) / (np.pi**2 * eps)

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6880 64-bit) (preloaded format=xelatex 2018.12.17)  19 DEC 2018 23:18
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6880 64-bit) (preloaded format=xelatex 2018.12.17)  24 DEC 2018 22:51
 entering extended mode
 **./курсач.tex
 (курсач.tex
@@ -1115,40 +1115,26 @@ LaTeX Info: Redefining \nameref on input line 240.
 LaTeX Warning: Command \l invalid in math mode on input line 492.
 
 Missing character: There is no ł in font cmmi12!
-[7] [8]
+[7] [8] [9]
+Overfull \hbox (8.15334pt too wide) in paragraph at lines 543--544
+[]\TU/TimesNewRoman(0)/m/n/12 Для удовлетворяющей указанным условиям функции $\
+OML/cmm/m/it/12 X\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr/m/n/12 )$ \TU/Time
+sNewRoman(0)/m/n/12 должно выполняться $\OML/cmm/m/it/12 X\OT1/cmr/m/n/12 (0) =
 
-LaTeX Warning: Reference `eq19' on page 9 undefined on input line 540.
+ []
 
-[9]
-Overfull \hbox (10.58379pt too wide) in paragraph at lines 557--558
-[]\TU/TimesNewRoman(0)/m/n/12 Функция Лежандра образует базис в некотором прост
-ранстве. Разложим функцию $\OML/cmm/m/it/12 !\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 
-z; t\OT1/cmr/m/n/12 )$
+[10] [11] [12] [13]
+Overfull \hbox (5.99033pt too wide) in paragraph at lines 685--687
+[]\TU/TimesNewRoman(0)/m/n/12 Рассчитаем $\OML/cmm/m/it/12 N[]$\TU/TimesNewRoma
+n(0)/m/n/12 , уменьшая количество слагаемых в сумме, начиная с $\OML/cmm/m/it/1
+2 N[]$
  []
 
 
-LaTeX Warning: Reference `eq18' on page 10 undefined on input line 563.
-
-[10] [11] [12] [13]
-
-LaTeX Warning: Reference `replacement_omega' on page 14 undefined on input line
- 691.
-
-
-LaTeX Warning: Reference `replacement_z' on page 14 undefined on input line 691
-.
+LaTeX Warning: Reference `u_solution' on page 14 undefined on input line 713.
 
 [14] [15]
-
-LaTeX Warning: Reference `replacement_omega' on page 16 undefined on input line
- 783.
-
-
-LaTeX Warning: Reference `replacement_z' on page 16 undefined on input line 783
-.
-
-[16] [17] [18] [19]
-Overfull \hbox (34.02068pt too wide) in paragraph at lines 869--873
+Overfull \hbox (34.02068pt too wide) in paragraph at lines 724--728
 \TU/TimesNewRoman(0)/m/n/12 umf.py pic –a=0.4”, теперь при расчетах коэффициент
  теплопроводности $\OML/cmm/m/it/12 ^^K$ \TU/TimesNewRoman(0)/m/n/12 будет раве
 н $\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 4 []$\TU/TimesNewRoman(0)
@@ -1159,53 +1145,52 @@ File: images/kir/var_1_t_6.png Graphic file (type bmp)
 <images/kir/var_1_t_6.png>
 File: images/kir/var_1_t_14.png Graphic file (type bmp)
 <images/kir/var_1_t_14.png>
-[20]
+[16]
 File: images/kir/var_1_t_28.png Graphic file (type bmp)
 <images/kir/var_1_t_28.png>
 File: images/pos/var_2_t_7.png Graphic file (type bmp)
 <images/pos/var_2_t_7.png>
- [21]
+ [17]
 File: images/pos/var_2_t_16.png Graphic file (type bmp)
 <images/pos/var_2_t_16.png>
 File: images/pos/var_2_t_29.png Graphic file (type bmp)
 <images/pos/var_2_t_29.png>
- [22]
+ [18]
 File: images/kir/var_1_z_0t17.png Graphic file (type bmp)
 <images/kir/var_1_z_0t17.png>
 File: images/kir/var_1_z_1t6.png Graphic file (type bmp)
 <images/kir/var_1_z_1t6.png>
- [23]
+ [19]
 File: images/kir/var_1_z_2t8.png Graphic file (type bmp)
 <images/kir/var_1_z_2t8.png>
 File: images/pos/var_2_z_0t3.png Graphic file (type bmp)
 <images/pos/var_2_z_0t3.png>
- [24]
+ [20]
 File: images/pos/var_2_z_1t4.png Graphic file (type bmp)
 <images/pos/var_2_z_1t4.png>
 File: images/pos/var_2_z_2t7.png Graphic file (type bmp)
 <images/pos/var_2_z_2t7.png>
- [25] [26] [27]
-Overfull \hbox (3.16954pt too wide) in paragraph at lines 1008--1010
+ [21] [22] [23]
+Overfull \hbox (3.16954pt too wide) in paragraph at lines 863--865
 []\TU/TimesNewRoman(0)/bx/n/12 Тихонов А.Н., Самарский А.А\TU/TimesNewRoman(0)/
 m/n/12 . Уравнения математической физики(5-е изд.) [Текст]
  []
 
-[28] [29]
+[24]
 ("C:\Users\User\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang1.s
 ty"
 File: lstlang1.sty 2018/09/02 1.7 listings language file
-) (src/umf.py [30] [31] [32] [33] [34] [35] [36] [37] [38] [39]) [40]
-[41] 
-AED: lastpage setting LastPage
-[42]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1108.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1108.
- (курсач.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1108.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1108.
+) (src/umf.py [25] [26] [27] [28] [29] [30] [31] [32] [33] [34])
 
+AED: lastpage setting LastPage
+[35]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 963.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 963.
+ (курсач.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 963.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 963.
 Package rerunfilecheck Info: File `курсач.out' has not changed.
-(rerunfilecheck)             Checksum: A54FEE2DD417537BBA395F0241724D42.
+(rerunfilecheck)             Checksum: 7F120A119145285FCD537BCCF2DE6BAD.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1219,15 +1204,15 @@ LaTeX Warning: There were multiply-defined labels.
  )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 627 ({)
+### simple group (level 1) entered at line 498 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 27499 strings out of 427771
- 479016 string characters out of 3147557
- 957611 words of memory out of 3000000
- 31208 multiletter control sequences out of 15000+200000
- 541581 words of font info for 82 fonts, out of 3000000 for 9000
+ 27491 strings out of 427771
+ 479117 string characters out of 3147557
+ 956421 words of memory out of 3000000
+ 31198 multiletter control sequences out of 15000+200000
+ 541597 words of font info for 84 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
- 42i,12n,91p,818b,2041s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,14n,91p,818b,2047s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on курсач.pdf (42 pages).
+Output written on курсач.pdf (35 pages).
