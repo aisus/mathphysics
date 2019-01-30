@@ -12,31 +12,35 @@ LX = 4
 LY = 1
 
 
-def __plot_2d(x, y, t, vline=0):
+def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
     fig = plt.figure()
     ax = plt.subplot(111)
 
     plt.rc('lines', linewidth=1)
 
-    graph, = ax.plot(x, y, color='b', marker='o',
+    graph, = ax.plot(x_sp, y_sp, color='b', marker='o',
                      linestyle='-', linewidth=2, markersize=0.1)
 
     plt.xlabel('x')
-    plt.ylabel('y')
+    plt.ylabel('z')
 
     box = ax.get_position()
     ax.set_position([box.x0, box.y0 + box.height * 0.1,
                      box.width, box.height * 0.9])
 
     if vline != 0:
-        plt.axvline(x=vline, color='r')
-
-    ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
-              loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+        line = plt.axvline(x=vline, color='r')
+        ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
+                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+    else:
+        ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
+                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
 
     plt.grid(True)
 
-    # plt.savefig(name + '.png')
+    if savefig:
+        name = '{0}_{1}_{2}'.format(vline, y, t).replace('.', '')
+        plt.savefig(name)
     plt.show()
 
 
@@ -70,14 +74,15 @@ def __anim_plot_2d(x_vals, y_per_time):
     plt.show()
 
 
-def __plot_3d(x, y, z):
+def __plot_3d(t, x, y, z):
     fig = plt.figure()
     axes = Axes3D(fig)
 
     axes.plot_surface(x, y, z, cmap='inferno')
 
     plt.show()
-
+    name = '{0}'.format(t).replace('.', '')
+    plt.savefig('{0}_3d'.format(name))
 
 def __anim_plot_3d(x_vals, y_vals, z_per_time):
     fig = plt.figure()
@@ -201,12 +206,13 @@ def static_3d(time, n=N_MAX):
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
-    __plot_3d(xv, yv, res)
+    __plot_3d(time, xv, yv, res)
 
 
 def calculate_with_precision(x, y, t, eps):
     x_sp = np.linspace(0, LX, int(LX / GRID_STEP))
     n = int(find_n(eps))
+    n = 500
 
     start = timeit.default_timer()
     print("Starting calculation with given precision {0}, N is {1}".format(eps, n))
@@ -217,8 +223,36 @@ def calculate_with_precision(x, y, t, eps):
 
     y_sp = __series_sum_3d(n, x_sp, y, t)
 
-    __plot_2d(x_sp, y_sp, t, x)
+    __plot_2d(x_sp, y_sp, t, x, y, True)
 
 
 def find_n(eps):
-    return (4 * np.sqrt(np.pi * eps + 1) + 1) / (np.pi**2 * eps)
+    ##return (4 * np.sqrt(np.pi*eps+1)) / (np.pi**2 * eps)
+    return (4 * np.sqrt(np.pi * eps + 1) + 1) / ((np.pi ** 2) * eps)
+
+
+def test_precision(t, eps, n_step):
+    x = 2
+    y = 0.5
+    x_sp = np.linspace(0, LX, int(LX / GRID_STEP))
+    n = int(find_n(eps))
+
+    print("Starting test for ", eps)
+    print("Theor.n is ", n)
+    print("max number of calcs is", n / n_step)
+    n = 600
+    prev_res = __series_sum_3d(n, x, y, t)
+    while True:
+        res = __series_sum_3d(n, x, y, t)
+        if abs(res - prev_res) < eps and n >= 0:
+            prev_res = res
+            n -= n_step
+            print('n: ', n, ' d: ', abs(res - prev_res))
+            continue
+        else:
+            print("found n as ", n, " for eps=", eps)
+            break
+
+
+if __name__ == '__main__':
+    test_precision(10000, 0.1, 1)

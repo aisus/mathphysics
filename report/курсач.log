@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6880 64-bit) (preloaded format=xelatex 2018.12.17)  24 DEC 2018 22:51
+This is XeTeX, Version 3.14159265-2.6-0.99999 (MiKTeX 2.9.6880 64-bit) (preloaded format=xelatex 2018.12.17)  25 DEC 2018 14:30
 entering extended mode
 **./курсач.tex
 (курсач.tex
@@ -1130,73 +1130,50 @@ n(0)/m/n/12 , уменьшая количество слагаемых в сум
 2 N[]$
  []
 
-
-LaTeX Warning: Reference `u_solution' on page 14 undefined on input line 713.
-
 [14] [15]
-Overfull \hbox (34.02068pt too wide) in paragraph at lines 724--728
-\TU/TimesNewRoman(0)/m/n/12 umf.py pic –a=0.4”, теперь при расчетах коэффициент
- теплопроводности $\OML/cmm/m/it/12 ^^K$ \TU/TimesNewRoman(0)/m/n/12 будет раве
-н $\OT1/cmr/m/n/12 0\OML/cmm/m/it/12 :\OT1/cmr/m/n/12 4 []$\TU/TimesNewRoman(0)
-/m/n/12 .
- []
-
-File: images/kir/var_1_t_6.png Graphic file (type bmp)
-<images/kir/var_1_t_6.png>
-File: images/kir/var_1_t_14.png Graphic file (type bmp)
-<images/kir/var_1_t_14.png>
-[16]
-File: images/kir/var_1_t_28.png Graphic file (type bmp)
-<images/kir/var_1_t_28.png>
-File: images/pos/var_2_t_7.png Graphic file (type bmp)
-<images/pos/var_2_t_7.png>
+File: images/02_01_0001.png Graphic file (type bmp)
+<images/02_01_0001.png>
+File: images/02_07_52.png Graphic file (type bmp)
+<images/02_07_52.png>
+ [16]
+File: images/04_07_27.png Graphic file (type bmp)
+<images/04_07_27.png>
+File: images/01_033_100.png Graphic file (type bmp)
+<images/01_033_100.png>
  [17]
-File: images/pos/var_2_t_16.png Graphic file (type bmp)
-<images/pos/var_2_t_16.png>
-File: images/pos/var_2_t_29.png Graphic file (type bmp)
-<images/pos/var_2_t_29.png>
+File: images/3d_0.png Graphic file (type bmp)
+<images/3d_0.png>
+File: images/3d_33.png Graphic file (type bmp)
+<images/3d_33.png>
+File: images/3d_66.png Graphic file (type bmp)
+<images/3d_66.png>
  [18]
-File: images/kir/var_1_z_0t17.png Graphic file (type bmp)
-<images/kir/var_1_z_0t17.png>
-File: images/kir/var_1_z_1t6.png Graphic file (type bmp)
-<images/kir/var_1_z_1t6.png>
- [19]
-File: images/kir/var_1_z_2t8.png Graphic file (type bmp)
-<images/kir/var_1_z_2t8.png>
-File: images/pos/var_2_z_0t3.png Graphic file (type bmp)
-<images/pos/var_2_z_0t3.png>
- [20]
-File: images/pos/var_2_z_1t4.png Graphic file (type bmp)
-<images/pos/var_2_z_1t4.png>
-File: images/pos/var_2_z_2t7.png Graphic file (type bmp)
-<images/pos/var_2_z_2t7.png>
- [21] [22] [23]
-Overfull \hbox (3.16954pt too wide) in paragraph at lines 863--865
+File: images/3d_8.png Graphic file (type bmp)
+<images/3d_8.png>
+ [19] [20] [21]
+Overfull \hbox (3.16954pt too wide) in paragraph at lines 852--854
 []\TU/TimesNewRoman(0)/bx/n/12 Тихонов А.Н., Самарский А.А\TU/TimesNewRoman(0)/
 m/n/12 . Уравнения математической физики(5-е изд.) [Текст]
  []
 
-[24]
+[22]
 ("C:\Users\User\AppData\Local\Programs\MiKTeX 2.9\tex\latex\listings\lstlang1.s
 ty"
 File: lstlang1.sty 2018/09/02 1.7 listings language file
-) (src/umf.py [25] [26] [27] [28] [29] [30] [31] [32] [33] [34])
+) (src/membrane.py [23] [24] [25] [26] [27] [28])
 
 AED: lastpage setting LastPage
-[35]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 963.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 963.
+[29]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 879.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 879.
  (курсач.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 963.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 963.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 879.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 879.
 Package rerunfilecheck Info: File `курсач.out' has not changed.
-(rerunfilecheck)             Checksum: 7F120A119145285FCD537BCCF2DE6BAD.
+(rerunfilecheck)             Checksum: 344760C730A573F195529C295D35D253.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
@@ -1207,12 +1184,12 @@ LaTeX Warning: There were multiply-defined labels.
 ### simple group (level 1) entered at line 498 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 27491 strings out of 427771
- 479117 string characters out of 3147557
- 956421 words of memory out of 3000000
+ 27480 strings out of 427771
+ 478577 string characters out of 3147557
+ 903689 words of memory out of 3000000
  31198 multiletter control sequences out of 15000+200000
- 541597 words of font info for 84 fonts, out of 3000000 for 9000
+ 541581 words of font info for 82 fonts, out of 3000000 for 9000
  1328 hyphenation exceptions out of 8191
  42i,14n,91p,818b,2047s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on курсач.pdf (35 pages).
+Output written on курсач.pdf (29 pages).
