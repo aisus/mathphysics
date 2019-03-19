@@ -1,4 +1,4 @@
-from equations.membrane import *
+from equations.analytic_solution import *
 
 
 def display_man():

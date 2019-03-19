@@ -22,19 +22,19 @@ def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
                      linestyle='-', linewidth=2, markersize=0.1)
 
     plt.xlabel('x')
-    plt.ylabel('z')
+    plt.ylabel('y')
 
     box = ax.get_position()
     ax.set_position([box.x0, box.y0 + box.height * 0.1,
                      box.width, box.height * 0.9])
 
-    if vline != 0:
-        line = plt.axvline(x=vline, color='r')
-        ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
-                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
-    else:
-        ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
-                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+    # if vline != 0:
+    #     line = plt.axvline(x=vline, color='r')
+    #     ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
+    #               loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+    # else:
+    ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
+                loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
 
     plt.grid(True)
 

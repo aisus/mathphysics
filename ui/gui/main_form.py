@@ -3,7 +3,7 @@
 
 import matplotlib
 from matplotlib import pyplot as plt
-from equations import membrane
+from equations import analytic_solution
 import matplotlib.animation as animation
 
 matplotlib.use("TkAgg")
@@ -18,11 +18,11 @@ LARGE_FONT = ("Verdana", 12)
 LX = 4
 LY = 1
 
-x_vals, y_per_time = membrane.animated_2d()
+x_vals, y_per_time = analytic_solution.animated_2d()
 
 
 def test():
-    x_vals, y_per_time = membrane.test()
+    x_vals, y_per_time = analytic_solution.test()
 
 
 fig = plt.figure()
