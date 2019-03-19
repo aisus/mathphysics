@@ -255,4 +255,4 @@ def test_precision(t, eps, n_step):
 
 
 if __name__ == '__main__':
-    animated_2d(4)
+    animated_2d(10)

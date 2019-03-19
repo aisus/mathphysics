@@ -11,8 +11,8 @@ LY = 1
 A = 1
 
 # Number of grid nodes per time and space variables
-K_big = 50
-I_big = 50
+K_big = 100
+I_big = 100
 
 ANIMATION_TIME_STEPS = 100
 
@@ -51,7 +51,7 @@ def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
 
 def __anim_plot_2d(x_vals, y_per_time):
     fig = plt.figure()
-    ax = plt.axes(xlim=(0, I_big), ylim=(- 4, 4))
+    ax = plt.axes(xlim=(0, I_big), ylim=(- 1.5, 1.5))
     line, = ax.plot([], [], lw=2)
     time_text = ax.text(.2, 1.5, '', fontsize=15)
 
@@ -85,7 +85,11 @@ def static_2d(time):
     start = timeit.default_timer()
     print("Starting calculation of numerical solution...")
 
-    res = differential_scheme_full(time)
+    h_x = LX / I_big
+    h_t = time / K_big
+
+    print("h_x = ", h_x, "; h_t = ", h_t)
+    res = differential_scheme_full(h_x, h_t)
 
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
@@ -102,8 +106,11 @@ def animated_2d(time):
 
     start = timeit.default_timer()
     print("Starting calculation for animated 2d...")
+
+    h_x = LX / I_big
     for t in t_vals:
-        res = differential_scheme_full(t)
+        h_t = t / K_big
+        res = differential_scheme_full(h_x, h_t)
         values_per_time.append(res)
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
@@ -111,41 +118,41 @@ def animated_2d(time):
     __anim_plot_2d(x_vals, values_per_time)
 
 
-# Solution of a differential scheme
-def differential_scheme_full(time):
-    # Grid step per space variable
-    h_x = LX / I_big
-    # Grid step per time variable
-    h_t = time / K_big
+def psi(i, h_x):
+    return - ((i * h_x) ** 2) / 4 + i * h_x
 
-    v_i_k_minus1 = np.zeros(I_big + 1)
-    v_i_k = np.zeros(I_big + 1)
-    v_i_k_plus1 = np.zeros(I_big + 1)
+
+def gamma_func(h_t, h_x):
+    return (A * h_t / h_x) ** 2
+
+
+def solution_k_plus1(gamma, h_t, i, v_i_k, v_i_k_minus1):
+    return gamma * (v_i_k[i - 1] + v_i_k[i + 1]) + (
+            2 - 2 * gamma - (A * h_t * np.pi / LY) ** 2) * v_i_k[i] - v_i_k_minus1[i]
+
+
+# Solution of a differential scheme
+def differential_scheme_full(h_x, h_t):
+
+    v_i_k_minus1 = np.zeros(I_big + 1, dtype='float64')
+    v_i_k = np.zeros(I_big + 1, dtype='float64')
+    v_i_k_plus1 = np.zeros(I_big + 1, dtype='float64')
 
     # _____________________________________________________
     # Setting the initial shape
-    gamma = (A * h_t / h_x) ** 2
-
     for i in range(0, I_big):
-        v_i_k_minus1[i] = (- ((i * h_x) ** 2) / 4 + i * h_x)
+        v_i_k_minus1[i] = psi(i, h_x)
 
-    # return v_i_k_minus1
-
-    # Setting the first time step
-    v_i_k[0] = 0
-    for i in range(1, I_big - 1):
-        v_i_k[i] = gamma * v_i_k_minus1[i - 1] + gamma * v_i_k_minus1[i + 1] + (
-                2 - 2 * gamma - (A * h_t * np.pi / LY) ** 2) * v_i_k_minus1[i]
-    v_i_k[I_big] = 0
+    v_i_k = v_i_k_minus1
 
     # _____________________________________________________
+    gamma = gamma_func(h_t, h_x)
 
-    for k in range(1, K_big-1):
+    for k in range(2, K_big):
         v_i_k_plus1[0] = 0
-        for i in range(1, I_big - 1):
-            v_i_k_plus1[i] = gamma * v_i_k[i - 1] + gamma * v_i_k[i + 1] + (
-                    2 - 2 * gamma - (A * h_t * np.pi / LY) ** 2) * v_i_k[i] - v_i_k_minus1[i]
-        v_i_k_plus1[I_big] = 0
+        for i in range(1, I_big):
+            v_i_k_plus1[i] = solution_k_plus1(gamma, h_t, i, v_i_k, v_i_k_minus1)
+
         v_i_k_minus1 = v_i_k
         v_i_k = v_i_k_plus1
 
@@ -153,4 +160,4 @@ def differential_scheme_full(time):
 
 
 if __name__ == '__main__':
-    animated_2d(4)
+    animated_2d(10)
