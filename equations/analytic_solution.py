@@ -13,7 +13,7 @@ LY = 1
 
 
 def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
-    fig = plt.figure()
+    fig = plt.figure('Analytic solution')
     ax = plt.subplot(111)
 
     plt.rc('lines', linewidth=1)
@@ -84,6 +84,7 @@ def __plot_3d(t, x, y, z):
     name = '{0}'.format(t).replace('.', '')
     plt.savefig('{0}_3d'.format(name))
 
+
 def __anim_plot_3d(x_vals, y_vals, z_per_time):
     fig = plt.figure()
     axes = Axes3D(fig)
@@ -105,13 +106,13 @@ def __anim_plot_3d(x_vals, y_vals, z_per_time):
         return axes.plot_surface(x_vals, y_vals, z, cmap='inferno'),  # time_text
 
     # call the animator.  blit=True means only re-draw the parts that have changed.
-    anim = animation.FuncAnimation(fig, animate, frames=200, interval=60, blit=False)
+    anim = animation.FuncAnimation(fig, animate, frames=200, interval=100, blit=False)
 
     plt.show()
 
 
 def __c_n(n):
-    return 8 * (np.pi * n * np.sin(np.pi * n) + 2 * np.cos(np.pi * n) - 2) / (np.pi ** 3 * n ** 3)
+    return -8 * (np.pi * n * np.sin(np.pi * n) + 2 * np.cos(np.pi * n) - 2) / (np.pi ** 3 * n ** 3)
 
 
 def __series_element(n, x, t):
@@ -121,7 +122,7 @@ def __series_element(n, x, t):
 def __series_sum_2d(N, x, t):
     res = 0
     for n in range(1, N):
-        res += -__series_element(n, x, t)
+        res += __series_element(n, x, t)
     return res
 
 
@@ -255,4 +256,5 @@ def test_precision(t, eps, n_step):
 
 
 if __name__ == '__main__':
-    animated_2d(10)
+    static_2d(2)
+    animated_2d(2)
