@@ -1,0 +1,11 @@
+\babel@toc {russian}{}
+\contentsline {section}{Введение}{6}{Item.7}% 
+\contentsline {section}{\numberline {1}Постановка краевой задачи}{7}{section.1}% 
+\contentsline {section}{\numberline {2}Решение краевой задачи с помощью простейшей явной схемы}{8}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}Построение простейшей явной схемы}{8}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Исследование аппроксимации простейшей явной схемы}{9}{subsection.2.2}% 
+\contentsline {section}{Заключение}{11}{equation.2.16}% 
+\contentsline {section}{Список использованных источников}{12}{equation.2.16}% 
+\contentsline {section}{Приложение А Код программы}{13}{Item.11}% 
+\contentsline {subsection}{A.1 Неявная схема}{13}{section*.1}% 
+\contentsline {subsection}{A.2 Схема Кранка-Николсона}{14}{section*.1}% 
