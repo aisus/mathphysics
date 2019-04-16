@@ -5,25 +5,24 @@ from matplotlib import pyplot as plt
 from matplotlib import animation
 
 # Constants
-T = 10
 LX = 4
 LY = 1
 A = 1
 
 # Number of grid nodes per time and space variables
-K_big = 100
-I_big = 100
+K_big = 500
+I_big = 500
 
 ANIMATION_TIME_STEPS = 100
 
 
-def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
-    fig = plt.figure('Numeric solution')
+def __plot_2d(x_sp, y_sp, t, figname, vline=0, y=0, savefig=False):
+    fig = plt.figure(figname)
     ax = plt.subplot(111)
 
     plt.rc('lines', linewidth=1)
 
-    graph, = ax.plot(x_sp, y_sp, color='b', marker='o',
+    graph, = ax.plot(x_sp, y_sp, color='orange', marker='o',
                      linestyle='-', linewidth=2, markersize=0.1)
 
     plt.xlabel('x')
@@ -38,7 +37,7 @@ def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
         ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
                   loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
     else:
-        ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
+        ax.legend([graph], ['numeric solution at t={0}'.format(t)],
                   loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
 
     plt.grid(True)
@@ -46,13 +45,13 @@ def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
     if savefig:
         name = '{0}_{1}_{2}'.format(vline, y, t).replace('.', '')
         plt.savefig(name)
-    plt.show()
+    # plt.show()
 
 
-def __anim_plot_2d(x_vals, y_per_time):
-    fig = plt.figure()
-    ax = plt.axes(xlim=(0, I_big), ylim=(- 1.5, 1.5))
-    line, = ax.plot([], [], lw=2)
+def __anim_plot_2d(x_vals, y_per_time, h_t):
+    fig = plt.figure("Numerical solution animated")
+    ax = plt.axes(xlim=(0, LX), ylim=(- 1.5, 1.5))
+    line, = ax.plot([], [], lw=2, color="orange")
     time_text = ax.text(.2, 1.5, '', fontsize=15)
 
     plt.xlabel('x')
@@ -67,21 +66,19 @@ def __anim_plot_2d(x_vals, y_per_time):
     # animation function.  This is called sequentially
     def animate(i):
         index = i % len(y_per_time)
-        x = x_vals
+        x = np.linspace(0, LX, I_big)
         y = y_per_time[index]
         line.set_data(x, y)
-        time_text.set_text('k={0}'.format(round(index, 3)))
+        time_text.set_text('T={0}'.format(round(index * h_t, 2)))
         return line, time_text
 
     # call the animator.  blit=True means only re-draw the parts that have changed.
     anim = animation.FuncAnimation(fig, animate,
-                                   frames=200, interval=40, blit=False)
+                                   frames=200, interval=30, blit=False)
     plt.show()
 
 
-def static_2d(time):
-    x = np.linspace(0, I_big + 1, I_big + 1)
-
+def static_2d(time, figname="Numerical solution"):
     start = timeit.default_timer()
     print("Starting calculation of numerical solution...")
 
@@ -94,18 +91,19 @@ def static_2d(time):
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
-    __plot_2d(x, res, time)
+    __plot_2d(np.linspace(0, LX, I_big), res, time, figname)
 
 
 def animated_2d(time):
     t_vals = np.linspace(0, time, ANIMATION_TIME_STEPS)
 
-    x_vals = np.linspace(0, I_big + 1, I_big + 1)
+    x_vals = np.linspace(0, I_big, I_big)
 
     values_per_time = []
 
     start = timeit.default_timer()
     print("Starting calculation for animated 2d...")
+    time_step = time / ANIMATION_TIME_STEPS
 
     h_x = LX / I_big
     for t in t_vals:
@@ -115,12 +113,12 @@ def animated_2d(time):
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
-    __anim_plot_2d(x_vals, values_per_time)
+    __anim_plot_2d(x_vals, values_per_time, time_step)
 
 
 # Initial shape
-def psi(i, h_x):
-    return - ((i * h_x) ** 2) / 4 + i * h_x
+def psi(x):
+    return -(x ** 2) / LX + x
 
 
 # "gamma" factor equals (a*h_t/h_x)^2
@@ -129,39 +127,43 @@ def gamma_func(h_t, h_x):
 
 
 # Solution of a differential scheme (v_i_k+1) for given indices
-def solve_k_plus1(gamma, h_t, i, v_i_k, v_i_k_minus1):
-    return gamma * (v_i_k[i - 1] + v_i_k[i + 1]) + (
-            2 - 2 * gamma - (A * h_t * np.pi / LY) ** 2) * v_i_k[i] - v_i_k_minus1[i]
+def solve_k_plus1(gamma, h_t: float, i: int, v_k: list, v_k_minus1: list):
+    return gamma * v_k[i - 1] + (-2 * gamma + 2 - (A * np.pi * h_t / LY) ** 2) * v_k[i] + gamma \
+           * v_k[i + 1] - v_k_minus1[i]
 
 
 # Full solution of a differential scheme
 def differential_scheme(h_x, h_t):
-    v_i_k_minus1 = np.zeros(I_big + 1, dtype='float64')
-    # v_i_k = np.zeros(I_big + 1, dtype='float64')
-    v_i_k_plus1 = np.zeros(I_big + 1, dtype='float64')
+    # Grid of a differentiol scheme
+    grid = []
+    for k in range(K_big):
+        grid.append([0] * I_big)
 
     # _____________________________________________________
     # Setting the initial shape (v(k=0))
+    x = np.linspace(0, LX, I_big)
     for i in range(0, I_big):
-        v_i_k_minus1[i] = psi(i, h_x)
+        grid[0][i] = psi(x[i])
 
     # Values at v(k=1) are equal to v(k=0)
-    v_i_k = v_i_k_minus1
+    # v_i_k = v_i_k_minus1
     # _____________________________________________________
 
+    # return grid[0]
     gamma = gamma_func(h_t, h_x)
-
+    grid[1] = grid[0]
     # Computing full solution with given amount of time steps
-    for k in range(2, K_big - 1):
-        v_i_k_plus1[0] = 0
-        for i in range(1, I_big):
-            v_i_k_plus1[i] = solve_k_plus1(gamma, h_t, i, v_i_k, v_i_k_minus1)
-        v_i_k_minus1 = v_i_k
-        v_i_k = v_i_k_plus1
+    for k in range(1, K_big - 1):
+        grid[k + 1][0] = 0
+        # print(grid[k][int(I_big / 2)])
+        for i in range(1, I_big - 1):
+            grid[k + 1][i] = solve_k_plus1(gamma, h_t, i, grid[k], grid[k - 1])
+        grid[k + 1][-1] = 0
 
-    return v_i_k_plus1
+    return grid[-1]
 
 
 if __name__ == '__main__':
-    static_2d(2)
-    animated_2d(2)
+    pass
+    # static_2d(2)
+    # animated_2d(2)

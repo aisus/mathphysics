@@ -1,4 +1,6 @@
-from equations.analytic_solution import *
+import equations.analytic_solution as analytic
+import equations.numerical_solution as numeric
+import matplotlib.pyplot as plt
 
 
 def display_man():
@@ -25,16 +27,21 @@ def input_loop():
             display_man()
             continue
         if user_input[0] == '-a2':
-            animated_2d(float(user_input[1]))
+            analytic.animated_2d(float(user_input[1]))
         elif user_input[0] == '-g2':
-            static_2d(float(user_input[1]))
+            analytic.static_2d(float(user_input[1]))
         elif user_input[0] == '-g3':
-            static_3d(float(user_input[1]))
+            analytic.static_3d(float(user_input[1]))
         elif user_input[0] == '-a3':
-            animated_3d(float(user_input[1]))
+            analytic.animated_3d(float(user_input[1]))
         elif user_input[0] == '-calc':
-            calculate_with_precision(float(user_input[1]), float(user_input[2]), float(user_input[3]),
+            analytic.calculate_with_precision(float(user_input[1]), float(user_input[2]), float(user_input[3]),
                                      float(user_input[4]))
+        elif user_input[0] == '-both':
+            time = float(user_input[1])
+            analytic.static_2d(time, "Solution")
+            numeric.static_2d(time, "Solution")
+            plt.show()
         else:
             print("invalid command")
 

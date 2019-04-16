@@ -12,8 +12,8 @@ LX = 4
 LY = 1
 
 
-def __plot_2d(x_sp, y_sp, t, figname, vline=0, y=0, savefig=False):
-    fig = plt.figure(figname)
+def __plot_2d(x_sp, y_sp, t, vline=0, y=0, savefig=False):
+    fig = plt.figure()
     ax = plt.subplot(111)
 
     plt.rc('lines', linewidth=1)
@@ -22,30 +22,30 @@ def __plot_2d(x_sp, y_sp, t, figname, vline=0, y=0, savefig=False):
                      linestyle='-', linewidth=2, markersize=0.1)
 
     plt.xlabel('x')
-    plt.ylabel('z')
+    plt.ylabel('y')
 
     box = ax.get_position()
     ax.set_position([box.x0, box.y0 + box.height * 0.1,
                      box.width, box.height * 0.9])
 
-    if vline != 0:
-        line = plt.axvline(x=vline, color='r')
-        ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
-                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
-    else:
-        ax.legend([graph], ['analytic solution at t={0}'.format(t)],
-                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+    # if vline != 0:
+    #     line = plt.axvline(x=vline, color='r')
+    #     ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
+    #               loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+    # else:
+    ax.legend([graph], ['u(x,y,t) at t={0}'.format(t)],
+                loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
 
     plt.grid(True)
 
     if savefig:
         name = '{0}_{1}_{2}'.format(vline, y, t).replace('.', '')
         plt.savefig(name)
-    #plt.show()
+    plt.show()
 
 
 def __anim_plot_2d(x_vals, y_per_time):
-    fig = plt.figure("Analytical solution animated")
+    fig = plt.figure()
     ax = plt.axes(xlim=(0, LX), ylim=(-LY * 2, LY * 2))
     line, = ax.plot([], [], lw=2)
     time_text = ax.text(.2, 1.5, '', fontsize=15)
@@ -84,7 +84,6 @@ def __plot_3d(t, x, y, z):
     name = '{0}'.format(t).replace('.', '')
     plt.savefig('{0}_3d'.format(name))
 
-
 def __anim_plot_3d(x_vals, y_vals, z_per_time):
     fig = plt.figure()
     axes = Axes3D(fig)
@@ -106,13 +105,13 @@ def __anim_plot_3d(x_vals, y_vals, z_per_time):
         return axes.plot_surface(x_vals, y_vals, z, cmap='inferno'),  # time_text
 
     # call the animator.  blit=True means only re-draw the parts that have changed.
-    anim = animation.FuncAnimation(fig, animate, frames=200, interval=100, blit=False)
+    anim = animation.FuncAnimation(fig, animate, frames=200, interval=60, blit=False)
 
     plt.show()
 
 
 def __c_n(n):
-    return -8 * (np.pi * n * np.sin(np.pi * n) + 2 * np.cos(np.pi * n) - 2) / (np.pi ** 3 * n ** 3)
+    return 8 * (np.pi * n * np.sin(np.pi * n) + 2 * np.cos(np.pi * n) - 2) / (np.pi ** 3 * n ** 3)
 
 
 def __series_element(n, x, t):
@@ -122,7 +121,7 @@ def __series_element(n, x, t):
 def __series_sum_2d(N, x, t):
     res = 0
     for n in range(1, N):
-        res += __series_element(n, x, t)
+        res += -__series_element(n, x, t)
     return res
 
 
@@ -133,7 +132,7 @@ def __series_sum_3d(N, x, y, t):
     return res * np.sin(np.pi * y / LY)
 
 
-def static_2d(time, figname = "Analytic solution"):
+def static_2d(time):
     x = np.linspace(0, LX, int(LX / GRID_STEP))
 
     start = timeit.default_timer()
@@ -144,7 +143,7 @@ def static_2d(time, figname = "Analytic solution"):
     end = timeit.default_timer()
     print("Finished calculation in {0}s".format(end - start))
 
-    __plot_2d(x, res, time, figname)
+    __plot_2d(x, res, time)
 
 
 def animated_2d(time, n=N_MAX):
@@ -256,5 +255,4 @@ def test_precision(t, eps, n_step):
 
 
 if __name__ == '__main__':
-    static_2d(2)
-    animated_2d(2)
+    test_precision(10000, 0.1, 1)

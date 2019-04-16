@@ -1,0 +1,11 @@
+\babel@toc {russian}{}
+\contentsline {section}{Введение}{6}{section*.1}
+\contentsline {section}{\numberline {1}Постановка краевой задачи}{7}{section.1}
+\contentsline {section}{\numberline {2}Аналитическое решение краевой задачи и получение решения задачи в виде ряда Фурье}{9}{section.2}
+\contentsline {section}{\numberline {3}Получение расчетной формулы}{12}{section.3}
+\contentsline {section}{\numberline {4}Оценка остатка ряда}{13}{section.4}
+\contentsline {section}{\numberline {5}Экспериментальное исследование качества оценки остатка ряда }{14}{section.5}
+\contentsline {section}{\numberline {6}Результаты вычислительных экспериментов}{16}{section.6}
+\contentsline {section}{Заключение}{21}{section*.12}
+\contentsline {section}{Список литературы}{22}{section*.13}
+\contentsline {section}{Приложение A Код программы}{23}{section*.14}
