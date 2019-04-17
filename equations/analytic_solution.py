@@ -41,7 +41,7 @@ def __plot_2d(x_sp, y_sp, t, figname, vline=0, y=0, savefig=False):
     if savefig:
         name = '{0}_{1}_{2}'.format(vline, y, t).replace('.', '')
         plt.savefig(name)
-    #plt.show()
+    # plt.show()
 
 
 def __anim_plot_2d(x_vals, y_per_time):
@@ -133,7 +133,12 @@ def __series_sum_3d(N, x, y, t):
     return res * np.sin(np.pi * y / LY)
 
 
-def static_2d(time, figname = "Analytic solution"):
+def get_value_at(x, t):
+    res = __series_sum_2d(500, x, t)
+    return res
+
+
+def static_2d(time, figname="Analytic solution"):
     x = np.linspace(0, LX, int(LX / GRID_STEP))
 
     start = timeit.default_timer()

@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7000 64-bit)  (format=lualatex 2019.4.14)  17 APR 2019 23:44
+This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7000 64-bit)  (format=lualatex 2019.4.14)  18 APR 2019 00:36
  restricted system commands enabled.
 **чм2.tex
 (./чм2.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.352 seconds
+luaotfload | main : initialization completed in 1.296 seconds
 
 ("C:/Users/Jane Doe/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cl
 s"
@@ -1241,6 +1241,15 @@ LaTeX Warning: Label `some_pic' multiply defined.
 
 LaTeX Warning: Label `some_pic' multiply defined.
 
+
+LaTeX Warning: Label `some_pic' multiply defined.
+
+
+LaTeX Warning: Label `some_pic' multiply defined.
+
+
+LaTeX Warning: Label `some_pic' multiply defined.
+
 )
 \openout1 = чм2.aux
 
@@ -1505,46 +1514,67 @@ Missing character: There is no с (U+0441) in font cmmi12!
 File: plots/075_50_50.png Graphic file (type png)
 <use plots/075_50_50.png>
 Package luatex.def Info: plots/075_50_50.png  used on input line 882.
-(luatex.def)             Requested size: 418.2612pt x 338.03125pt.
+(luatex.def)             Requested size: 358.51173pt x 278.88194pt.
 Missing character: There is no с (U+0441) in font cmmi12!
  [12<./plots/075_10_10.png>]
-<plots/075_100_100.png, id=160, 587.5551pt x 532.6299pt>
-File: plots/075_100_100.png Graphic file (type png)
-<use plots/075_100_100.png>
-Package luatex.def Info: plots/075_100_100.png  used on input line 890.
-(luatex.def)             Requested size: 418.26082pt x 338.01303pt.
+<plots/075_500_500.png, id=160, 587.5551pt x 532.6299pt>
+File: plots/075_500_500.png Graphic file (type png)
+<use plots/075_500_500.png>
+Package luatex.def Info: plots/075_500_500.png  used on input line 890.
+(luatex.def)             Requested size: 358.51567pt x 278.8628pt.
 Missing character: There is no с (U+0441) in font cmmi12!
- [13<./plots/075_50_50.png>]
-Overfull \hbox (1.08823pt too wide) in paragraph at lines 958--958
+Missing character: There is no с (U+0441) in font cmmi12!
+ [13<./plots/075_50_50.png><./plots/075_500_500.png>]
+<plots/15_10_10.png, id=169, 462.528pt x 346.896pt>
+File: plots/15_10_10.png Graphic file (type png)
+<use plots/15_10_10.png>
+Package luatex.def Info: plots/15_10_10.png  used on input line 901.
+(luatex.def)             Requested size: 346.57048pt x 253.51779pt.
+Missing character: There is no с (U+0441) in font cmmi12!
+<plots/15_50_50.png, id=170, 462.528pt x 346.896pt>
+File: plots/15_50_50.png Graphic file (type png)
+<use plots/15_50_50.png>
+Package luatex.def Info: plots/15_50_50.png  used on input line 909.
+(luatex.def)             Requested size: 346.57048pt x 253.51779pt.
+Missing character: There is no с (U+0441) in font cmmi12!
+ [14<./plots/15_10_10.png>]
+<plots/15_500_500.png, id=177, 462.528pt x 346.896pt>
+File: plots/15_500_500.png Graphic file (type png)
+<use plots/15_500_500.png>
+Package luatex.def Info: plots/15_500_500.png  used on input line 917.
+(luatex.def)             Requested size: 358.52606pt x 278.88281pt.
+Missing character: There is no с (U+0441) in font cmmi12!
+ [15<./plots/15_50_50.png><./plots/15_500_500.png>]
+Overfull \hbox (1.08823pt too wide) in paragraph at lines 987--987
  []|[]| 
  []
 
 
-Overfull \hbox (1.08823pt too wide) in paragraph at lines 958--958
+Overfull \hbox (1.08823pt too wide) in paragraph at lines 987--987
  []|[]| 
  []
 
 
-Overfull \hbox (1.08823pt too wide) in paragraph at lines 958--958
+Overfull \hbox (1.08823pt too wide) in paragraph at lines 987--987
  []|[]| 
  []
 
-[14<./plots/075_100_100.png>]
-Overfull \hbox (1.48233pt too wide) in paragraph at lines 1004--1008
+[16]
+Overfull \hbox (1.48233pt too wide) in paragraph at lines 1033--1037
 []\TU/TimesNewRoman(0)/m/n/12 Про-ве-де-но тео-ре-ти-че-ск
 ое ис-сле-до-ва-ние раз-ност-ной схе-мы, в ре-
 зуль-та-те ко-то-ро-го уста-
  []
 
-[15] [16] [17] 
+[17] [18] [19] 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1051.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1051.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1080.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1080.
 (./чм2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1051.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1051.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1080.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1080.
 Package rerunfilecheck Info: File `чм2.out' has not changed.
-(rerunfilecheck)             Checksum: 21BDBF7F9F439FE0DBD319EF2FC63182;2914.
+(rerunfilecheck)             Checksum: A42CCFB038480C7F8D03556A9E7A07DF;2914.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1559,13 +1589,13 @@ LaTeX Warning: There were multiply-defined labels.
 ### bottom level
 
 Here is how much of LuaTeX's memory you used:
- 31186 strings out of 494300
+ 31239 strings out of 494300
  100000,794899 words of node,token memory allocated
  1100 words of node memory still in use:
    15 hlist, 3 vlist, 3 rule, 12 dir, 4 math, 7 glue, 5 kern, 1 glyph, 45 attrib
 ute, 98 glue_spec, 45 attribute_list, 2 write nodes
-   avail lists: 1:4,2:888,3:142,4:35,5:459,6:58,7:1846,8:87,9:1260,10:11,11:319
- 34444 multiletter control sequences out of 65536+200000
+   avail lists: 1:4,2:888,3:142,4:35,5:459,6:55,7:1846,8:87,9:1260,10:11,11:319
+ 34456 multiletter control sequences out of 65536+200000
  95 fonts using 23088015 bytes
  47i,18n,92p,814b,923s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Windows/Fonts/timesi.ttf><C:/Windows/Fonts/timesbi.ttf><C:/Windows/Fonts/tim
@@ -1581,9 +1611,9 @@ ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Jane Doe/AppDat
 a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/
 Jane Doe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.
 pfb>
-Output written on чм2.pdf (17 pages, 362951 bytes).
+Output written on чм2.pdf (19 pages, 435163 bytes).
 
-PDF statistics: 245 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 131072)
+PDF statistics: 262 PDF objects out of 1000 (max. 8388607)
+ 64 named destinations out of 1000 (max. 131072)
  81 words of extra memory for PDF output out of 10000 (max. 100000000)
 

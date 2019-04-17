@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5771458-0044-4167-881f-f87877f443ba" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/mathphysics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/mathphysics.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/equations/analytic_solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/equations/analytic_solution.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equations/numerical_solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/equations/numerical_solution.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/plots/075_100_100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.aux" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.log" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.out" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.tex" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/чм2.toc" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/console/simple_console/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/console/simple_console/test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,10 +23,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ui/console/simple_console/simple_console.py">
+        <entry file="file://$PROJECT_DIR$/ui/console/simple_console/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
-              <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+            <state relative-caret-position="414">
+              <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -48,8 +54,8 @@
         <option value="$PROJECT_DIR$/equations/membrane.py" />
         <option value="$PROJECT_DIR$/ui/console/simple_console/simple_console.py" />
         <option value="$PROJECT_DIR$/equations/analytic_solution.py" />
-        <option value="$PROJECT_DIR$/ui/console/simple_console/test.py" />
         <option value="$PROJECT_DIR$/equations/numerical_solution.py" />
+        <option value="$PROJECT_DIR$/ui/console/simple_console/test.py" />
       </list>
     </option>
   </component>
@@ -259,8 +265,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10714286" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.108208954" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -276,7 +283,7 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Run" order="3" weight="0.32942432" />
+      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.32942432" />
     </layout>
   </component>
   <component name="editorHistoryManager">
@@ -301,35 +308,34 @@
     </entry>
     <entry file="file://C:/ProgramData/Anaconda3/envs/untitled/Lib/site-packages/matplotlib/pyplot.py" />
     <entry file="file://C:/ProgramData/Anaconda3/envs/untitled/Lib/site-packages/matplotlib/axes/_base.py" />
-    <entry file="file://$PROJECT_DIR$/equations/analytic_solution.py">
+    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/simple_console.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="35" column="47" selection-start-line="35" selection-start-column="47" selection-end-line="35" selection-end-column="47" />
-          <folding />
+        <state relative-caret-position="633">
+          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/test.py">
+    <entry file="file://$PROJECT_DIR$/equations/analytic_solution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+        <state relative-caret-position="253">
+          <caret line="130" column="25" lean-forward="true" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/equations/numerical_solution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="132" lean-forward="true" selection-start-line="132" selection-end-line="132" />
+        <state relative-caret-position="334">
+          <caret line="91" column="32" lean-forward="true" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/simple_console.py">
+    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+        <state relative-caret-position="414">
+          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
         </state>
       </provider>
     </entry>

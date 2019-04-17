@@ -78,6 +78,22 @@ def __anim_plot_2d(x_vals, y_per_time, h_t):
     plt.show()
 
 
+def get_value_at(x, time):
+    h_x = LX / I_big
+    h_t = time / K_big
+    res = differential_scheme(h_x, h_t)
+
+    for i in range(len(res)-1):
+        if i * h_x == x:
+            return res[i]
+
+        if res[i] < x < res[i + 1]:
+            left_x = h_x * i
+            t = (x-left_x) / h_x
+            value = left_x + t * h_x
+            return value
+
+
 def static_2d(time, figname="Numerical solution"):
     start = timeit.default_timer()
     print("Starting calculation of numerical solution...")

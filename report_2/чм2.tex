@@ -704,7 +704,7 @@ showstringspaces=false,
 			 & -\alpha((\nu_x-h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}-\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_x\nu_{xxxx}^{IV}}{24}-2\nu_x\nonumber\\ 
 			& + \nu_x+h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}+\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_t\nu_{xxxx}^{IV}}{24}+ O(h^5_x)))\frac{1}{h^2_x} - \left(\frac{\pi}{l_y}\right)^2 \nu)\nonumber\\ 		
 			& = \nu_t'' + \frac{h^2_t\nu^{IV}_{tttt}}{12} + O(h^3_t) - \alpha^2\left(\nu_x'' + \frac{h^2_x\nu^{IV}_{xxxx}}{12} + O(h^3_x) -\left(\frac{\pi}{l_y}\right)^2 \nu\right)\nonumber\\
-			&= O(h^2_t, h^2_x)\nonumber\\
+			&= O(h^2_x, h^2_t)\nonumber\\
 		\end{align}
 		
 		Для второго оператора невязка равна:
@@ -734,7 +734,7 @@ showstringspaces=false,
 		
 		После нахождения всех необходимых величин, определим порядок аппроксимации неявной схемы, применив равномерную норму к порядкам аппроксимации всех выражений, входящих в состав схемы:
 		\begin{equation}
-			|| \delta f_h ||_{F_h} = \max_{\substack{i = \overline{1, I-1} \\ k = \overline{0, K-1}}} | \delta f^1_h| + \max_{i = \overline{0, I}} | \delta f^2_h| + \max_{k = \overline{1, K}} | \delta f^3_h| +  \max_{k = \overline{1, K}} | \delta f^4_h| +  \max_{k = \overline{1, K}} | \delta f^5_h| = O(h_t, h^2_x).
+			|| \delta f_h ||_{F_h} = \max_{\substack{i = \overline{1, I-1} \\ k = \overline{0, K-1}}} | \delta f^1_h| + \max_{i = \overline{0, I}} | \delta f^2_h| + \max_{k = \overline{1, K}} | \delta f^3_h| +  \max_{k = \overline{1, K}} | \delta f^4_h| +  \max_{k = \overline{1, K}} | \delta f^5_h| = O(h^2_x, h_t).
 		\end{equation}
 		
 		В ходе исследования было установлено, что простейшая явная схема аппроксимирует исходную задачу линейно относительно шага по времени $h_t$ и квадратично относительно шага по пространственной переменной $h_x$. 
@@ -879,7 +879,7 @@ showstringspaces=false,
 
  \begin{figure}[H]
    \begin{center}
-			\includegraphics[width=0.7\pagewidth, height=0.4\pageheight]{plots/075_50_50}
+			\includegraphics[width=0.6\pagewidth, height=0.33\pageheight]{plots/075_50_50}
 	\caption{ График численного и аналитического решений при параметрах $K=50, I=50, t = 0.75с$}
 	 \end{center}
 	\label{some_pic}
@@ -887,11 +887,38 @@ showstringspaces=false,
 
 \begin{figure}[H]
 \begin{center}
-			\includegraphics[width=0.7\pagewidth, height=0.4\pageheight]{plots/075_100_100}
+			\includegraphics[width=0.6\pagewidth, height=0.33\pageheight]{plots/075_500_500}
 	\caption{График численного и аналитического решений при параметрах $K=500, I=500, t = 0.75с$}
 	 \end{center}
 	\label{some_pic}
 \end{figure}
+
+		 
+	На рисунках 4-6 приведены графики зависимости положения точек поверхности мембраны от пространственной переменной $x$ в момент времени $t = 1.5с$, полученные с помощью простейшей явной схемы. Можно видеть, что точность численного решения понижается с увеличением промежутка времени и, соответственно, шага сетки по временной переменной.
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=0.58\pagewidth, height=0.3\pageheight]{plots/15_10_10}
+			\caption{График численного и аналитического решений при параметрах $K=10, I=10, t = 1.5с$}
+		\end{center}
+		\label{some_pic}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=0.58\pagewidth, height=0.3\pageheight]{plots/15_50_50}
+			\caption{ График численного и аналитического решений при параметрах $K=50, I=50, t = 1.5с$}
+		\end{center}
+		\label{some_pic}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[width=0.6\pagewidth, height=0.33\pageheight]{plots/15_500_500}
+			\caption{График численного и аналитического решений при параметрах $K=500, I=500, t = 1.5с$}
+		\end{center}
+		\label{some_pic}
+	\end{figure}
 
 %На рисунках 4-6 приведены графики зависимости концентрации раствора от пространственной переменной $x$ в момент времени $t = 70с$, полученные с помощью схемы Кранка-Николсона.
 %\begin{figure}[H]
@@ -918,31 +945,33 @@ showstringspaces=false,
 %	\label{some_pic}
 %\end{figure}
 
-	Как видно из рисунков 1-3 с увеличением числа узлов сетки наблюдается визуальная сходимость, иными словами численное решение приближается к точному решению исходной задачи.
+Как видно из рисунков 1-6, с увеличением числа узлов сетки наблюдается визуальная сходимость, иными словами, численное решение приближается к точному решению исходной задачи.
 
 Исследуем экспериментально скорость сходимости неявной схемы . Для
 этого выберем некоторую достаточно крупную сетку и будем ее последовательно
 измельчать, каждый раз определяя величину абсолютной погрешности. 
 
-%При этом шаг $h$ будем измельчать в 2 раза, а $\tau$ - в 4 раза. Согласно результатам
-%теоретического исследования погрешность сеточного решения для неявной схемы
-%характеризуется величиной $O(h^2, \tau)$. Таким образом, следует ожидать, что при
-%каждом указанном выше измельчении сетки погрешность численного решения
-%будет уменьшаться приблизительно в 4 раза.
+При этом шаг $h$ будем измельчать в 2 раза, а $\tau$ - в 4 раза. Согласно результатам
+теоретического исследования погрешность сеточного решения для неявной схемы
+характеризуется величиной $O(h^2, \tau)$. Таким образом, следует ожидать, что при
+каждом указанном выше измельчении сетки погрешность численного решения
+будет уменьшаться приблизительно в 4 раза.
 
 %Для неявной схемы погрешность сеточного решения можно описать следующим образом:
 %
-%\begin{equation}\label{eps}
-%	\epsilon_1_{(h, \tau)} = \alpha h^2 + \beta \tau + O(h^3, \tau^2)
-%\end{equation}
-%\begin{equation}\label{epsby4}
-%\epsilon_1_{( \frac{h}{2}, \frac{\tau}{4} )} = \alpha \frac{h^2}{4}  + \beta \frac{\tau}{4}  + O( \frac{h^3}%{8} , \frac{ \tau^2}{16})
-%\end{equation}
-%		 
-%		 Тогда отношение величин \eqref{eps} и \eqref{epsby4} можно оценить следующим образом:	
-%		 \begin{equation}\label{eps}
-%	\delta_1_{(h, \tau)} = \frac{ \epsilon_1_{ h, \tau } } {\epsilon_1_{ ( \frac{h}{2}, \frac{  \tau }{4})}} %\approx 4
-%\end{equation}
+%		\begin{equation}
+%			\epsilon_1_{(h, \tau)} = \alpha h^2 + \beta \tau + O(h^3, \tau^2)
+%		\end{equation}
+%		
+%		\begin{equation}
+%		\epsilon_1_{( \frac{h}{2}, \frac{\tau}{4} )} = \alpha \frac{h^2}{4}  + \beta \frac{\tau}{4}  + O( \frac{h^3}%{8} , \frac{ \tau^2}{16})
+%		\end{equation}
+%		
+%		Тогда отношение величин \eqref{eps} и \eqref{epsby4} можно оценить следующим образом:	
+%		 	
+%		 \begin{equation}
+%		 \delta_1_{(h, \tau)} = \frac{ \epsilon_1_{ h, \tau } } {\epsilon_1_{ ( \frac{h}{2}, \frac{  \tau }{4})}} %\approx 4
+%		 \end{equation}
 
 Результаты экспериментального исследования сходимости разностной схемы представлены в таблице 1:
 		
