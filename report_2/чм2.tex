@@ -636,7 +636,7 @@ showstringspaces=false,
 				&\frac{\nu^{k-1}_i - 2\nu^{k}_i + \nu^{k+1}_i}{h_t^2} - \alpha^2\left(\frac{\nu^{k}_{i-1} - 2\nu^{k}_i + \nu^{k}_{i+1}}{h_x^2} - \left(\frac{\pi}{l_y}\right)^2 \nu^{k}_i\right)\\
 				& \frac{\nu^1_i - \nu^0_i}{h_t} \\ 
 				& \nu^0_i \\
-				& \nu^0_0 \\
+				& \nu^k_0 \\
 				& \nu^k_I \\
 				\end{split}
 			\right) \\
@@ -652,8 +652,8 @@ showstringspaces=false,
 			=
 			\left(\begin{split}
 				& 0 \\
-				& \psi_i \\
 				& 0 \\
+				& \psi_i \\
 				& 0 \\
 				& 0 \\
 				\end{split}
@@ -676,10 +676,10 @@ showstringspaces=false,
 			=
 			\left(\begin{split}
 				& {[L^1_h[\nu]_h - f^1_h]} \\
-				& {[L^1_h[\nu]_h - f^1_h]} \\
-				& {[L^1_h[\nu]_h - f^1_h]} \\
-				& {[L^1_h[\nu]_h - f^1_h]} \\
-				& {[L^1_h[\nu]_h - f^1_h]} \\
+				& {[L^2_h[\nu]_h - f^2_h]} \\
+				& {[L^3_h[\nu]_h - f^3_h]} \\
+				& {[L^4_h[\nu]_h - f^4_h]} \\
+				& {[L^5_h[\nu]_h - f^5_h]} \\
 				\end{split}
 			\right) 
 		\end{equation}
@@ -696,33 +696,48 @@ showstringspaces=false,
 %			\end{equation}
 			
 		Невязка для первого оператора имеет следующий вид:
-		\begin{align}\label{taylor_1}
+		\begin{align}
  &\delta f^1_h|_{ (x_i, t_k ) } = [ L^1_h[\nu]_h - f^1_h ]_{ (x_i, t_k ) } = \frac{\nu(x_i, t_{k-1})-2\nu(x_i, t_k)+\nu(x_i, t_{k+1})}{h^{2}_t}\nonumber\\
 			 & - \alpha^2\left(\frac{\nu(x_{i-1}, t_{k})-2\nu(x_i, t_k)+\nu(x_{i+1}, t_{k})}{h^{2}_x} - \left(\frac{\pi}{ly}\right)^2\nu(x_i, t_k)\right) = \nonumber\\
-			 & \frac{u^{''}_{tt} + \frac{h^2_t\nu^{IV}_{tttt}}{12} + O(h^3_i)}{ h^2_t } = O(h^2, \tau)\nonumber.
+			 & (\nu_t-h_t\nu_t'+\frac{h^2_t\nu_{tt}''}{2}-\frac{h^3_t\nu_{ttt}'''}{6}+\frac{h^4_t\nu_{tttt}^{IV}}{24}-2\nu_t\nonumber\\ 
+			& + \nu_t+h_t\nu_t'+\frac{h^2_t\nu_{tt}''}{2}+\frac{h^3_t\nu_{ttt}'''}{6}+\frac{h^4_t\nu_{tttt}^{IV}}{24}+ O(h^5_t))\frac{1}{h^2_t}\nonumber\\ 
+			 & -\alpha((\nu_x-h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}-\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_x\nu_{xxxx}^{IV}}{24}-2\nu_x\nonumber\\ 
+			& + \nu_x+h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}+\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_t\nu_{xxxx}^{IV}}{24}+ O(h^5_x)))\frac{1}{h^2_x} - \left(\frac{\pi}{l_y}\right)^2 \nu)\nonumber\\ 		
+			& = \nu_t'' + \frac{h^2_t\nu^{IV}_{tttt}}{12} + O(h^3_t) - \alpha^2\left(\nu_x'' + \frac{h^2_x\nu^{IV}_{xxxx}}{12} + O(h^3_x) -\left(\frac{\pi}{l_y}\right)^2 \nu\right)\nonumber\\
+			&= O(h^2_t, h^2_x)\nonumber\\
 		\end{align}
 		
-%		Для второго оператора невязка равна:
-%		\begin{equation}
-%			\delta f^2_h|_{ (x_i, t_0 ) } = [L^2[u]_h - f^2_h]_{ (x_i, t_0 ) } = u(x_i , 0) - 0 = 0\nonumber.
-%		\end{equation}
-%		
-%		Невязка для третьего оператора:
-%		\begin{equation}
-%			\delta f^3_h|_{ (x_0, t_k ) } = [L^3[u]_h - f^3_h]_{ (x_0, t_k ) } = u(0 , t_k) - \gamma^k = \gamma(t_k) - \gamma(t_k) = 0\nonumber.
-%		\end{equation}
-%		
-%		Невязка для последнего оператора будет выглядеть следующим образом:
-%		\begin{equation}
-%			\delta f^4_h|_{ (x_I, t_k ) } = [L^4[u]_h - f^4_h]_{ (x_I, t_k ) } = u(l , t_k) - \gamma^k = \gamma(t_k) - \gamma(t_k) = 0\nonumber.
-%		\end{equation}
-%		
-%		После нахождения всех необходимых величин, определим порядок аппроксимации неявной схемы, применив равномерную норму к порядкам аппроксимации всех выражений, входящих в состав схемы:
-%		\begin{equation}
-%			|| \delta f_h ||_{F_h} = \max_{\substack{i = \overline{1, I-1} \\ k = \overline{0, K-1}}} | \delta f^1_h| + \max_{i = \overline{0, I}} | \delta f^2_h| + \max_{k = \overline{1, K}} | \delta f^3_h| +  \max_{k = \overline{1, K}} | \delta f^4_h| = O(h^2, \tau).
-%		\end{equation}
-%		
-%		В ходе исследования было установлено, что простейшая неявная схема аппроксимирует исходную задачу линейно относительно $\tau$ и квадратично относительно $h$. 
+		Для второго оператора невязка равна:
+		\begin{equation}
+		\begin{split}
+			&\delta f^2_h|_{ (x_i, t_0 ) } = [L^2[u]_h - f^2_h]_{ (x_i, t_0 ) } = \\
+			&\frac{\nu(x_i, 1) - \nu(x_i, 0)}{h_t} - 0 = 
+			\left(\nu_t(0)+h_t\nu_t'(0)+\frac{h^2_t\nu_{tt}''(0)}{2} + O(h^3_t)\right)\frac{1}{h_t} = \nonumber\\
+			&\frac{\nu_t''(0)}{2h_t} + O(h^2_t) = O(h_t)\nonumber\\
+		\end{split}
+		\end{equation}
+
+		Невязка для третьего оператора:
+		\begin{equation}
+			\delta f^3_h|_{ (x_i, t_0 ) } = [L^3[u]_h - f^3_h]_{ (x_i, t_0 ) } = \nu(x_i , 0) - \psi_i = \psi_i - \psi_i = 0\nonumber.
+		\end{equation}
+		
+		Невязка для четвертого оператора:
+		\begin{equation}
+			\delta f^4_h|_{ (x_0, t_k ) } = [L^4[u]_h - f^4_h]_{ (x_0, t_k ) } = \nu(0 , t_k) - 0 = 0\nonumber.
+		\end{equation}
+		
+		Невязка для пятого оператора:
+		\begin{equation}
+		\delta f^5_h|_{ (x_I, t_k ) } = [L^5[u]_h - f^5_h]_{ (x_I, t_k ) } = \nu(l_x , t_k) - 0 = 0\nonumber.
+		\end{equation}
+		
+		После нахождения всех необходимых величин, определим порядок аппроксимации неявной схемы, применив равномерную норму к порядкам аппроксимации всех выражений, входящих в состав схемы:
+		\begin{equation}
+			|| \delta f_h ||_{F_h} = \max_{\substack{i = \overline{1, I-1} \\ k = \overline{0, K-1}}} | \delta f^1_h| + \max_{i = \overline{0, I}} | \delta f^2_h| + \max_{k = \overline{1, K}} | \delta f^3_h| +  \max_{k = \overline{1, K}} | \delta f^4_h| +  \max_{k = \overline{1, K}} | \delta f^5_h| = O(h_t, h^2_x).
+		\end{equation}
+		
+		В ходе исследования было установлено, что простейшая явная схема аппроксимирует исходную задачу линейно относительно шага по времени $h_t$ и квадратично относительно шага по пространственной переменной $h_x$. 
 		
 %		\subsection{Исследование устойчивости простейшей неявной схемы}{
 %			Введем определение устойчивости.
@@ -852,7 +867,7 @@ showstringspaces=false,
 	\section{Результаты вычислительного эксперимента}{
 		В ходе курсовой работы была реализована программа, осуществляющая численное решение задачи колебний прямоугольной мембраны в промежутке времени от $0$ до $T$, на основе простейшей явной разностной схемыы.
 		 
-		 На рисунках 1-3 приведены графики зависимости положения точек поверхности мембраны от пространственной переменной $x$ в момент времени $t = 0.75с$, полученные с помощью простейшей неявной схемы.
+		 На рисунках 1-3 приведены графики зависимости положения точек поверхности мембраны от пространственной переменной $x$ в момент времени $t = 0.75с$, полученные с помощью простейшей явной схемы.
 	
 		 \begin{figure}[H]
 		  \begin{center}

@@ -10,8 +10,8 @@ LY = 1
 A = 1
 
 # Number of grid nodes per time and space variables
-K_big = 500
-I_big = 500
+K_big = 100
+I_big = 100
 
 ANIMATION_TIME_STEPS = 100
 
