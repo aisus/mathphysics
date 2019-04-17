@@ -87,7 +87,7 @@ def get_value_at(x, time):
         if i * h_x == x:
             return res[i]
 
-        if res[i] < x < res[i + 1]:
+        if i*h_x < x < (i+1)*h_x:
             left_x = h_x * i
             t = (x-left_x) / h_x
             value = left_x + t * h_x

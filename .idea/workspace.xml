@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5771458-0044-4167-881f-f87877f443ba" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/equations/analytic_solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/equations/analytic_solution.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/equations/numerical_solution.py" beforeDir="false" afterPath="$PROJECT_DIR$/equations/numerical_solution.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report_2/plots/075_100_100.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/sources/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/sources/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report_2/sources/main_kr.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/report_2/чм2.aux" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.aux" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report_2/чм2.log" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/report_2/чм2.out" beforeDir="false" afterPath="$PROJECT_DIR$/report_2/чм2.out" afterDir="false" />
@@ -25,8 +25,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/console/simple_console/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+            <state relative-caret-position="587">
+              <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -56,10 +56,11 @@
         <option value="$PROJECT_DIR$/equations/analytic_solution.py" />
         <option value="$PROJECT_DIR$/equations/numerical_solution.py" />
         <option value="$PROJECT_DIR$/ui/console/simple_console/test.py" />
+        <option value="$PROJECT_DIR$/ui/console/simple_console/result.txt" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="223" />
     <option name="y" value="85" />
     <option name="width" value="974" />
@@ -264,15 +265,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.108208954" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.108208954" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.39920557" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.3992016" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" />
@@ -283,7 +283,7 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="Run" order="3" visible="true" weight="0.32942432" />
+      <window_info anchor="right" id="Run" order="3" weight="0.32942432" />
     </layout>
   </component>
   <component name="editorHistoryManager">
@@ -308,13 +308,6 @@
     </entry>
     <entry file="file://C:/ProgramData/Anaconda3/envs/untitled/Lib/site-packages/matplotlib/pyplot.py" />
     <entry file="file://C:/ProgramData/Anaconda3/envs/untitled/Lib/site-packages/matplotlib/axes/_base.py" />
-    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/simple_console.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="633">
-          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/equations/analytic_solution.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
@@ -322,10 +315,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/result.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="62" lean-forward="true" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/console/simple_console/simple_console.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="633">
+          <caret line="42" column="41" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/equations/numerical_solution.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="91" column="32" lean-forward="true" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+        <state relative-caret-position="449">
+          <caret line="65" column="54" lean-forward="true" selection-start-line="65" selection-start-column="54" selection-end-line="65" selection-end-column="54" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -334,8 +341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/console/simple_console/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="20" column="14" lean-forward="true" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
+        <state relative-caret-position="587">
+          <caret line="32" column="12" lean-forward="true" selection-start-line="32" selection-start-column="12" selection-end-line="32" selection-end-column="12" />
         </state>
       </provider>
     </entry>

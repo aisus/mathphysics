@@ -1,194 +1,252 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import os
-import logging
-from mpmath import mp
-from scipy.sparse import csr_matrix
-from scipy.sparse.linalg import spsolve
-from functools import wraps
-import argparse
+import timeit
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import pyplot as plt
+from matplotlib import animation
 
-mp.dps = 15
+# Constants
+LX = 4
+LY = 1
+A = 1
 
-T = 100
-C = 0.5
-D = 0.001
-l = 30
-alpha = 0.3
-a = mp.sqrt(alpha / C)
-xi = mp.pi / T
+# Number of grid nodes per time and space variables
+K_big = 100
+I_big = 100
+
+ANIMATION_TIME_STEPS = 100
 
 
-def with_dps(dps):
-    """
-        Param. decorator.
-        When applied to function, changes mp.dps inside it.
-    """
-    def decorator(f):
-        @wraps(f)
-        def wrapper(*args, **kwds):
-            old_dps = mp.dps
-            mp.dps = dps
+def __plot_2d(x_sp, y_sp, t, figname, vline=0, y=0, savefig=False):
+    fig = plt.figure(figname)
+    ax = plt.subplot(111)
 
-            res = f(*args, **kwds)
+    plt.rc('lines', linewidth=1)
 
-            mp.dps = old_dps
+    graph, = ax.plot(x_sp, y_sp, color='orange', marker='o',
+                     linestyle='-', linewidth=2, markersize=0.1)
 
-            return res
+    plt.xlabel('x')
+    plt.ylabel('z')
 
-        return wrapper
+    box = ax.get_position()
+    ax.set_position([box.x0, box.y0 + box.height * 0.1,
+                     box.width, box.height * 0.9])
 
-    return decorator
+    if vline != 0:
+        line = plt.axvline(x=vline, color='r')
+        ax.legend([line, graph], ['x={0}'.format(vline), 'u(x,y,t) at t={0}'.format(t)],
+                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
+    else:
+        ax.legend([graph], ['numeric solution at t={0}'.format(t)],
+                  loc='upper center', bbox_to_anchor=(0.5, -0.13), ncol=3, fancybox=True)
 
+    plt.grid(True)
 
-def phi(t):
-    return 0.1 * mp.sin(xi * t)**2
-
-
-def u(x, t, num_steps=10):
-    return v(x, t, num_steps) + phi(t)
-
-
-def v(x, t, num_steps=10):
-    res = 0
-
-    for k in range(num_steps):
-        n = 2*k + 1 # n = 1,3,5,...
-        res += v_n(n, x, t)
-
-    return res
+    if savefig:
+        name = '{0}_{1}_{2}'.format(vline, y, t).replace('.', '')
+        plt.savefig(name)
+    # plt.show()
 
 
-def v_n(n, x, t):
-    return C_n(n, t) * X_n(n, x)
+def __anim_plot_2d(x_vals, y_per_time, h_t):
+    fig = plt.figure("Numerical solution animated")
+    ax = plt.axes(xlim=(0, LX), ylim=(- 1.5, 1.5))
+    line, = ax.plot([], [], lw=2, color="orange")
+    time_text = ax.text(.2, 1.5, '', fontsize=15)
+
+    plt.xlabel('x')
+    plt.ylabel('y')
+
+    # initialization function: plot the background of each frame
+    def init():
+        time_text.set_text('')
+        line.set_data([], [])
+        return line, time_text
+
+    # animation function.  This is called sequentially
+    def animate(i):
+        index = i % len(y_per_time)
+        x = np.linspace(0, LX, I_big)
+        y = y_per_time[index]
+        line.set_data(x, y)
+        time_text.set_text('T={0}'.format(round(index * h_t, 2)))
+        return line, time_text
+
+    # call the animator.  blit=True means only re-draw the parts that have changed.
+    anim = animation.FuncAnimation(fig, animate,
+                                   frames=200, interval=30, blit=False)
+    plt.show()
 
 
-phi_0 = phi(0)
+def get_value_at(x, time):
+    h_x = LX / I_big
+    h_t = time / K_big
+    res = differential_scheme(h_x, h_t)
+
+    for i in range(len(res)-1):
+        if i * h_x == x:
+            return res[i]
+
+        if i*h_x < x < (i+1)*h_x:
+            left_x = h_x * i
+            t = (x-left_x) / h_x
+            value = left_x + t * h_x
+            return value
 
 
-@with_dps(20)
-def C_n(n, t):
-    if n % 2 == 0:
-        return 0
+def static_2d(time, figname="Numerical solution"):
+    start = timeit.default_timer()
+    print("Starting calculation of numerical solution...")
 
-    if t == 0:
-        return -phi_0 * 4 / (mp.pi * n)
+    h_x = LX / I_big
+    h_t = time / K_big
 
-    g = -((n * mp.pi * a / l)**2 + D / C)
+    print("h_x = ", h_x, "; h_t = ", h_t)
+    res = differential_scheme(h_x, h_t)
 
+    end = timeit.default_timer()
+    print("Finished calculation in {0}s".format(end - start))
 
-
-    I1_a = mp.exp(-g*t)*(-g**2 + g**2*mp.cos(2*xi*t) -2*xi*g*mp.sin(2*xi*t) + 4*xi**2*mp.exp(g*t) -4*xi**2) / (20*(g**3 + 4*xi**2*g))
-    I2_a = xi*mp.exp(-g*t)*(-g*mp.sin(2*xi*t) - 2*xi*mp.cos(2*xi*t) + 2*xi*mp.exp(g*t))/(10*(g**2 + 4*xi**2))
-
-    res_a = mp.exp(g * t) * (C_n(n, 0) - 4 * (D * I1_a / C + I2_a)) / (mp.pi * n)
-
-    return res_a
+    __plot_2d(np.linspace(0, LX, I_big), res, time, figname)
 
 
-sin_vec = np.vectorize(mp.sin)
+def animated_2d(time):
+    t_vals = np.linspace(0, time, ANIMATION_TIME_STEPS)
+
+    x_vals = np.linspace(0, I_big, I_big)
+
+    values_per_time = []
+
+    start = timeit.default_timer()
+    print("Starting calculation for animated 2d...")
+    time_step = time / ANIMATION_TIME_STEPS
+
+    h_x = LX / I_big
+    for t in t_vals:
+        h_t = t / K_big
+        res = differential_scheme(h_x, h_t)
+        values_per_time.append(res)
+    end = timeit.default_timer()
+    print("Finished calculation in {0}s".format(end - start))
+
+    __anim_plot_2d(x_vals, values_per_time, time_step)
 
 
-def X_n(n, x):
-    return sin_vec(mp.pi * n * x / l)
+# Initial shape
+def psi(x):
+    return -(x ** 2) / LX + x
 
-def tridiag_solve(A, b):
-    n = len(b)
-    solution = [mp.mpf(0) for _ in range(n)]
 
-    for i in range(1, n):
-        A[i][i] -= A[i][i - 1] / A[i - 1][i - 1] * A[i - 1][i]
-        b[i] -= A[i][i - 1] / A[i - 1][i - 1] * b[i - 1]
+# "gamma" factor equals (a*h_t/h_x)^2
+def gamma_func(h_t, h_x):
+    return (A * h_t / h_x) ** 2
 
-    solution[-1] = b[-1] / A[-1][-1]
 
-    for i in range(n - 2, -1, -1):
-        solution[i] = (b[i] - A[i][i + 1] * solution[i + 1]) / A[i][i]
+# Solution of a differential scheme (v_i_k+1) for given indices
+def solve_k_plus1(gamma, h_t: float, i: int, v_k: list, v_k_minus1: list):
+    return gamma * v_k[i - 1] + (-2 * gamma + 2 - (A * np.pi * h_t / LY) ** 2) * v_k[i] + gamma \
+           * v_k[i + 1] - v_k_minus1[i]
 
-    return solution
+
+# Full solution of a differential scheme
+def differential_scheme(h_x, h_t):
+    # Grid of a differentiol scheme
+    grid = []
+    for k in range(K_big):
+        grid.append([0] * I_big)
+
+    # _____________________________________________________
+    # Setting the initial shape (v(k=0))
+    x = np.linspace(0, LX, I_big)
+    for i in range(0, I_big):
+        grid[0][i] = psi(x[i])
+
+    # Values at v(k=1) are equal to v(k=0)
+    # v_i_k = v_i_k_minus1
+    # _____________________________________________________
+
+    # return grid[0]
+    gamma = gamma_func(h_t, h_x)
+    grid[1] = grid[0]
+    # Computing full solution with given amount of time steps
+    for k in range(1, K_big - 1):
+        grid[k + 1][0] = 0
+        # print(grid[k][int(I_big / 2)])
+        for i in range(1, I_big - 1):
+            grid[k + 1][i] = solve_k_plus1(gamma, h_t, i, grid[k], grid[k - 1])
+        grid[k + 1][-1] = 0
+
+    return grid[-1]
+
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-v', '--verbose', help='increase output verbosity', action='store_true')
-    parser.add_argument('-n', '--num', help='number of elements to sum up', type=int, default=15)
-    parser.add_argument('-c', '--cycles', help='number of full cycles to simulate', type=int, default=1)
-    parser.add_argument('-x', '--x', help='number of points in x', type=int, default=121)
-    parser.add_argument('-t', '--t', help='number of points in t', type=int, default=1601)
+    pass
+    # static_2d(2)
+    # animated_2d(2)
 
-    args = parser.parse_args()
 
-    if args.verbose:
-        logging.basicConfig(level=logging.INFO)
+import equations.numerical_solution as num
+import equations.analytic_solution as an
+import matplotlib.pyplot as plt
 
-    num_steps = args.num
-    x = np.linspace(0, l, args.x)
-    t = np.linspace(0, args.cycles * T, args.cycles*args.t)
 
-    n = len(t)
+def to_file(filename, i_s: list, k_s: list, ht_s: list, hx_s: list, eps: list, deltas: list):
+    f = open(filename, 'w+')
+    f.write("I    K    ht    hx    eps    d\n")
+    for i in range(len(i_s)):
+        f.write(f"{i_s[i]}    {k_s[i]}    {ht_s[i]}    {hx_s[i]}    {eps[i]}    {deltas[i]}\n")
 
-    if not os.path.exists('plots'):
-        os.makedirs('plots')
 
-    tau = t[1] - t[0]
-    h = x[1] - x[0]
-    print('tau', tau)
-    print('h', h)
-    beta = alpha * (tau) / (C * (h) ** 2)
-    mu = 1 + 2 * beta + (D * (tau) / C)
-    p = []
-    args.x -= 2
-    for i in range(0, args.x):
-        line = []
-        if (i == 0):
-            line.append(mu)
-            line.append(-beta)
-            for j in range(2, args.x):
-                line.append(0)
-        elif (i == args.x):
-            for j in range(0, args.x - 2):
-                line.append(0)
-            line.append(-beta)
-            line.append(mu)
-        else:
-            for j in range(0,args.x):
-                if (j == i - 1):
-                    line.append(-beta)
-                elif (j == i):
-                    line.append(mu)
-                elif (j == i + 1):
-                    line.append(-beta)
-                else:
-                    line.append(0)
+if __name__ == '__main__':
+    time = 2
+    x = 1
+    num.I_big = 500
+    num.K_big = 500
+    # an.static_2d(time)
+    # num.static_2d(time)
+    # an.animated_2d(time)
+    # num.animated_2d(time)
 
-        p.append(line)
-    p = np.array(p)
+    # an.static_2d(time, 'solution')
+    # num.static_2d(time, 'solution')
 
-    q = np.zeros(args.x)
-    uprev = np.zeros(args.x)
-    print(q)
-    err = [0]*n
-    for i in range(n-1):
-        q[0] = beta * phi(t[i+1])
-        q[-1] = beta * phi(t[i+1])
-        rightPart = (uprev + q)
-        u_num = np.linalg.solve(p, rightPart)
-        uprev = u_num
-        eps = []
-        for j in range(len(p)):
-            eps.append(np.dot(p[j], u_num)- rightPart[j])
-        print(max(eps))
-        data = u(x, t[i+1], num_steps)
-        forplot = [phi(t[i+1])] + list(u_num) + [phi(t[i+1])]
-        forplot = np.array(list(map(float, forplot)))
-        data = np.array(list(map(float, data)))
-        fig = plt.figure()
-        ax = plt.subplot(111)
-        plt.xlim([-1, l + 1])
-        plt.ylim([-.05, .25])
-        ax.plot(x, data, label=f'u(x) at time {round(t[i+1], 2)}')
-        ax.plot(x, forplot, label=f'u_num(x) at time {round(t[i+1], 2)}')
-        ax.plot([-1, l + 1], [0, 0])
-        ax.plot([-1, l + 1], [phi(t[i+1]), phi(t[i+1])], label=f'phi(t) at time {round(t[i+1], 2)}')
-        ax.legend()
-        fig.savefig('plots/plot{:03}.png'.format(i))
-        plt.close(fig)
+    #print(num.get_value_at(x, time))
+    # print(an.get_value_at(x, time))
+    #plt.show()
+
+    i_big = 4
+    k_big = 4
+    eps = []
+    i_s = []
+    k_s = []
+    ht_s = []
+    hx_s = []
+    deltas = []
+    for i in range(6):
+        print(f"--- i:{i_big}, k:{k_big}")
+
+        hx = 4 / i_big
+        ht = time / i_big
+
+        num.I_big = i_big
+        num.K_big = k_big
+
+        n = num.get_value_at(x, time)
+        a = an.get_value_at(x, time)
+        epsilon = abs(n - a)
+
+        d = 0
+        if i > 0:
+            d = eps[i-1] / epsilon
+
+        eps.append(epsilon)
+        i_s.append(i_big)
+        k_s.append(k_big)
+        ht_s.append(ht)
+        hx_s.append(hx)
+        deltas.append(d)
+
+        i_big *= 2
+        k_big *= 4
+
+    to_file('result.txt', i_s, k_s, ht_s, hx_s, eps, deltas)
