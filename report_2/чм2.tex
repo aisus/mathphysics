@@ -481,8 +481,8 @@ showstringspaces=false,
 	Уравнение свободных поперечных колебаний мембраны имеет вид:
 	\begin{equation}\label{source_func}
 	\dfrac{\partial^2 u}{\partial t^2} = \alpha^2(
-	\dfrac{\partial u}{\partial x} + 
-	\dfrac{\partial u}{\partial y}).
+	\dfrac{\partial^2 u}{\partial x^2} + 
+	\dfrac{\partial^2 u}{\partial y^2}).
 	\end{equation}
 	
 	В условии задачи указано, что края мембраны жестко закреплены. Отсюда
@@ -507,8 +507,8 @@ showstringspaces=false,
 	
 	Подставляем в исходное уравнение, переходим к виду:
 	\begin{equation}
-	\dfrac{\partial^2 \nu}{\partial t^2} = \alpha^2(\dfrac{\partial^2 \nu}{\partial x^2}
-	- \dfrac{\pi^2}{l_y}\nu(x, t)).
+	\dfrac{\partial^2 \nu}{\partial t^2} = a^2\left(\dfrac{\partial^2 \nu}{\partial x^2}
+	- \left(\dfrac{pi}{l_y}\right)^2\nu(x, t)\right).
 	\end{equation}
 	
 	Пересчитываем начальные условия для $\nu(x,y)$:
@@ -525,7 +525,7 @@ showstringspaces=false,
 	\begin{equation}\label{full_initial_problem}
 	\left\{
 	\begin{split}
-	& \dfrac{\partial^2 \nu}{\partial t^2} = \alpha^2\left(\dfrac{\partial^2 \nu}{\partial x^2}
+	& \dfrac{\partial^2 \nu}{\partial t^2} = a^2\left(\dfrac{\partial^2 \nu}{\partial x^2}
 	- \left(\dfrac{\pi}{l_y}\right)^2\nu(x, t)\right), {\quad 0 \le x \le l_x;} \\
 	&\nu|_{x=0}, \quad  
 	\nu|_{x=l_x} = 0;\\
@@ -540,7 +540,7 @@ showstringspaces=false,
 \section{Решение краевой задачи с помощью простейшей явной схемы}
 {
 	\subsection{Построение простейшей явной схемы}{
-			Для построения простейшей неявной разностной схемы для задачи \eqref{full_initial_problem} заменим все непрерывные соотношения их сеточными аналогами. В данном случае будем использовать равномерную сетку, определяемую как следующее множество узлов $\ (x_{i}, t_{k}) $:
+			Для построения простейшей явной разностной схемы для задачи \eqref{full_initial_problem} заменим все непрерывные соотношения их сеточными аналогами. В данном случае будем использовать равномерную сетку, определяемую как следующее множество узлов $\ (x_{i}, t_{k}) $:
 			\begin{equation} \label{grid_xt}
 				\begin{split}
 				x_{i} &= ih_x; i = \overline{ 0, I}; h_x = \frac{L}{I},\\
@@ -572,7 +572,7 @@ showstringspaces=false,
 			\begin{equation} \label{schema_final}
 					\left\{
 					\begin{split}
-						&\frac{\nu^{k-1}_i - 2\nu^{k}_i + \nu^{k+1}_i}{h_t^2} = \alpha^2\left(\frac{\nu^{k}_{i-1} - 2\nu^{k}_i + \nu^{k}_{i+1}}{h_x^2} - \left(\frac{\pi}{l_y}\right)^2 \nu^{k}_i\right) ,  i =  \overline{ 1, I-1}, k =  \overline{ 1, K-1}\\
+						&\frac{\nu^{k-1}_i - 2\nu^{k}_i + \nu^{k+1}_i}{h_t^2} = a^2\left(\frac{\nu^{k}_{i-1} - 2\nu^{k}_i + \nu^{k}_{i+1}}{h_x^2} - \left(\frac{\pi}{l_y}\right)^2 \nu^{k}_i\right) ,  i =  \overline{ 1, I-1}, k =  \overline{ 1, K-1}\\
 						& \frac{\nu^{1}_i - \nu^{0}_i}{h_t} = 0,  i = \overline{ 1, I-1} \\
 						&\nu^0_{i} = \psi_i, i =  \overline{ 1, I-1}\\
 						&\nu^k_{0} = 0, k =  \overline{1, K}\\
@@ -590,8 +590,8 @@ showstringspaces=false,
 		Расчетная формула для $i =  \overline{ 1, I-1}, k =  \overline{ 1, K-1}$:
 		\begin{equation} \label{solution_main}
 			\begin{split}
-			& \gamma = \left(\frac{\alpha h_t}{h_x}\right)^2 \\
-			& \nu^{k+1}_i = \gamma\nu^k_{i-1}+\left(-2\gamma+2-\left(\frac{\alpha\pi h_t}{l_y}\right)^2\right)\nu^k_i + \gamma\nu^k_{i+1}-\nu^{k-1}_i \\
+			& \gamma = \left(\frac{a h_t}{h_x}\right)^2 \\
+			& \nu^{k+1}_i = \gamma\nu^k_{i-1}+\left(-2\gamma+2-\left(\frac{a\pi h_t}{l_y}\right)^2\right)\nu^k_i + \gamma\nu^k_{i+1}-\nu^{k-1}_i \\
 			\end{split}
 		\end{equation}
 		
@@ -633,7 +633,7 @@ showstringspaces=false,
 			\right) 
 			=
 			\left(\begin{split}
-				&\frac{\nu^{k-1}_i - 2\nu^{k}_i + \nu^{k+1}_i}{h_t^2} - \alpha^2\left(\frac{\nu^{k}_{i-1} - 2\nu^{k}_i + \nu^{k}_{i+1}}{h_x^2} - \left(\frac{\pi}{l_y}\right)^2 \nu^{k}_i\right)\\
+				&\frac{\nu^{k-1}_i - 2\nu^{k}_i + \nu^{k+1}_i}{h_t^2} - a^2\left(\frac{\nu^{k}_{i-1} - 2\nu^{k}_i + \nu^{k}_{i+1}}{h_x^2} - \left(\frac{\pi}{l_y}\right)^2 \nu^{k}_i\right)\\
 				& \frac{\nu^1_i - \nu^0_i}{h_t} \\ 
 				& \nu^0_i \\
 				& \nu^k_0 \\
@@ -698,12 +698,12 @@ showstringspaces=false,
 		Невязка для первого оператора имеет следующий вид:
 		\begin{align}
  &\delta f^1_h|_{ (x_i, t_k ) } = [ L^1_h[\nu]_h - f^1_h ]_{ (x_i, t_k ) } = \frac{\nu(x_i, t_{k-1})-2\nu(x_i, t_k)+\nu(x_i, t_{k+1})}{h^{2}_t}\nonumber\\
-			 & - \alpha^2\left(\frac{\nu(x_{i-1}, t_{k})-2\nu(x_i, t_k)+\nu(x_{i+1}, t_{k})}{h^{2}_x} - \left(\frac{\pi}{ly}\right)^2\nu(x_i, t_k)\right) = \nonumber\\
+			 & - a^2\left(\frac{\nu(x_{i-1}, t_{k})-2\nu(x_i, t_k)+\nu(x_{i+1}, t_{k})}{h^{2}_x} - \left(\frac{\pi}{ly}\right)^2\nu(x_i, t_k)\right) = \nonumber\\
 			 & (\nu_t-h_t\nu_t'+\frac{h^2_t\nu_{tt}''}{2}-\frac{h^3_t\nu_{ttt}'''}{6}+\frac{h^4_t\nu_{tttt}^{IV}}{24}-2\nu_t\nonumber\\ 
 			& + \nu_t+h_t\nu_t'+\frac{h^2_t\nu_{tt}''}{2}+\frac{h^3_t\nu_{ttt}'''}{6}+\frac{h^4_t\nu_{tttt}^{IV}}{24}+ O(h^5_t))\frac{1}{h^2_t}\nonumber\\ 
-			 & -\alpha((\nu_x-h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}-\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_x\nu_{xxxx}^{IV}}{24}-2\nu_x\nonumber\\ 
+			 & -a^2((\nu_x-h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}-\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_x\nu_{xxxx}^{IV}}{24}-2\nu_x\nonumber\\ 
 			& + \nu_x+h_x\nu_x'+\frac{h^2_x\nu_{xx}''}{2}+\frac{h^3_x\nu_{xxx}'''}{6}+\frac{h^4_t\nu_{xxxx}^{IV}}{24}+ O(h^5_x)))\frac{1}{h^2_x} - \left(\frac{\pi}{l_y}\right)^2 \nu)\nonumber\\ 		
-			& = \nu_t'' + \frac{h^2_t\nu^{IV}_{tttt}}{12} + O(h^3_t) - \alpha^2\left(\nu_x'' + \frac{h^2_x\nu^{IV}_{xxxx}}{12} + O(h^3_x) -\left(\frac{\pi}{l_y}\right)^2 \nu\right)\nonumber\\
+			& = \nu_t'' + \frac{h^2_t\nu^{IV}_{tttt}}{12} + O(h^3_t) - a^2\left(\nu_x'' + \frac{h^2_x\nu^{IV}_{xxxx}}{12} + O(h^3_x) -\left(\frac{\pi}{l_y}\right)^2 \nu\right)\nonumber\\
 			&= O(h^2_x, h^2_t)\nonumber\\
 		\end{align}
 		
@@ -713,7 +713,7 @@ showstringspaces=false,
 			&\delta f^2_h|_{ (x_i, t_0 ) } = [L^2[u]_h - f^2_h]_{ (x_i, t_0 ) } = \\
 			&\frac{\nu(x_i, 1) - \nu(x_i, 0)}{h_t} - 0 = 
 			\left(\nu_t(0)+h_t\nu_t'(0)+\frac{h^2_t\nu_{tt}''(0)}{2} + O(h^3_t)\right)\frac{1}{h_t} = \nonumber\\
-			&\frac{\nu_t''(0)}{2h_t} + O(h^2_t) = O(h_t)\nonumber\\
+			&\frac{h_t\nu_t''(0)}{2} + O(h^2_t) = O(h_t)\nonumber\\
 		\end{split}
 		\end{equation}
 
@@ -732,7 +732,7 @@ showstringspaces=false,
 		\delta f^5_h|_{ (x_I, t_k ) } = [L^5[u]_h - f^5_h]_{ (x_I, t_k ) } = \nu(l_x , t_k) - 0 = 0\nonumber.
 		\end{equation}
 		
-		После нахождения всех необходимых величин, определим порядок аппроксимации неявной схемы, применив равномерную норму к порядкам аппроксимации всех выражений, входящих в состав схемы:
+		После нахождения всех необходимых величин, определим порядок аппроксимации схемы, применив равномерную норму к порядкам аппроксимации всех выражений, входящих в состав схемы:
 		\begin{equation}
 			|| \delta f_h ||_{F_h} = \max_{\substack{i = \overline{1, I-1} \\ k = \overline{0, K-1}}} | \delta f^1_h| + \max_{i = \overline{0, I}} | \delta f^2_h| + \max_{k = \overline{1, K}} | \delta f^3_h| +  \max_{k = \overline{1, K}} | \delta f^4_h| +  \max_{k = \overline{1, K}} | \delta f^5_h| = O(h^2_x, h_t).
 		\end{equation}

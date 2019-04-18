@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7000 64-bit)  (format=lualatex 2019.4.14)  18 APR 2019 02:23
+This is LuaTeX, Version 1.10.0 (MiKTeX 2.9.7000 64-bit)  (format=lualatex 2019.4.14)  18 APR 2019 12:37
  restricted system commands enabled.
 **чм2.tex
 (./чм2.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.300 seconds
+luaotfload | main : initialization completed in 1.314 seconds
 
 ("C:/Users/Jane Doe/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/article.cl
 s"
@@ -1469,12 +1469,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 414--415
 
 \openout4 = чм2.toc
  [5] [6] [7]
-Overfull \hbox (39.94302pt too wide) detected at line 582
+Overfull \hbox (6.13953pt too wide) in paragraph at lines 543--544
+[]\TU/TimesNewRoman(0)/m/n/12 Для по-стро-е-ния про-стей-
+шей яв-ной раз-ност-ной схе-мы для за-да-чи [] 
+за-ме-ним все непре-
+ []
+
+
+Overfull \hbox (38.56108pt too wide) detected at line 582
  $[]$   
  []
 
 [8]
-Overfull \hbox (14.73589pt too wide) detected at line 662
+Overfull \hbox (13.35394pt too wide) detected at line 662
  $[][]$   
  []
 
@@ -1615,7 +1622,7 @@ s/cm/cmr6.pfb><C:/Users/Jane Doe/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
 ublic/amsfonts/cm/cmr8.pfb><C:/Users/Jane Doe/AppData/Local/Programs/MiKTeX 2.9/
 fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Jane Doe/AppData/Local/Progr
 ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on чм2.pdf (25 pages, 499649 bytes).
+Output written on чм2.pdf (25 pages, 499975 bytes).
 
 PDF statistics: 572 PDF objects out of 1000 (max. 8388607)
  324 named destinations out of 1000 (max. 131072)
